@@ -1,3 +1,4 @@
+import vazirFont from "@/constants/localFont";
 import "@/styles/globals.css";
 
 export const metadata = {
@@ -8,7 +9,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="fa" dir="rtl">
-      <body>{children}</body>
+      <body
+        suppressHydrationWarning
+        className={`${vazirFont.variable} font-sans`}
+      >
+        {children}
+      </body>
     </html>
   );
 }
