@@ -13,7 +13,9 @@ export default function RootLayout({ children }) {
         suppressHydrationWarning
         className={`${vazirFont.variable} font-sans`}
       >
-        {children}
+        <div>Header</div>
+
+        <div className="container xl:max-w-screen-xl">{children}</div>
       </body>
     </html>
   );
