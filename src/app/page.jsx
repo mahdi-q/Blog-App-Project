@@ -4,11 +4,11 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div>
-      <h1 className="my-20 text-center text-2xl font-bold text-secondary-800 md:text-5xl">
+      <h1 className="my-20 text-center text-2xl font-bold text-secondary-800 md:text-4xl lg:text-5xl">
         اپلیکیشن مدیریت بلاگ ها
       </h1>
 
-      <p className="mb-10 text-center text-lg leading-loose text-secondary-500">
+      <p className="mb-10 text-center leading-loose text-secondary-500 md:text-lg">
         جایی که قراره بتونی یه اپلیکیشن بلاگ کامل رو مدیریت کنی!
         <br />
         بتونی بلاگ بسازی - کامنت بزاری و در پنلت همه اتفاقات رو رصد کنی!
