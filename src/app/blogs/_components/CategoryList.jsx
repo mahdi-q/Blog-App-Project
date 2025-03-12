@@ -4,7 +4,7 @@ const listStyles =
   "rounded p-2 pr-6 transition-colors duration-300 hover:bg-secondary-100 lg:ml-6";
 
 async function CategoryList() {
-  const res = await fetch("http://localhost:5000/api/category/list");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/category/list`);
   const {
     data: { categories },
   } = await res.json();
