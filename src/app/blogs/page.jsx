@@ -1,6 +1,14 @@
-function BlogListPage() {
+import { Suspense } from "react";
+import PostList from "./_components/PostList";
+import Spinner from "@/ui/Spinner";
+
+async function BlogListPage() {
   return (
-    <div>Blog List Page</div>
-  )
+    <div>
+      <Suspense fallback={<Spinner />}>
+        <PostList />
+      </Suspense>
+    </div>
+  );
 }
-export default BlogListPage
+export default BlogListPage;
