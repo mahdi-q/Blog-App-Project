@@ -123,11 +123,11 @@
     animation: rotate 1s infinite linear;
   }
   .spinner-mini {
-    margin: 0;
-    width: 20px;
+    margin: auto;
+    width: 30px;
     aspect-ratio: 1;
     border-radius: 50%;
-    border: 2px solid rgb(var(--color-primary-200));
+    border: 4px solid rgb(var(--color-primary-200));
     border-right-color: transparent;
     animation: rotate 1s infinite linear;
   }
