@@ -10,7 +10,7 @@ async function CategoryList() {
   } = await res.json();
 
   return (
-    <ul className="space-y-2">
+    <ul className="space-y-1">
       <li className={listStyles}>
         <Link href="/blogs">همه</Link>
       </li>
