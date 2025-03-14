@@ -3,13 +3,18 @@ import PostAuthor from "../_components/PostAuthor";
 import PostReadingTime from "../_components/PostReadingTime";
 import PostInteraction from "../_components/PostInteraction";
 import { notFound } from "next/navigation";
+import { getPostBySlug } from "@/services/postServices";
+
+export async function generateMetadata({ params }) {
+  const post = await getPostBySlug(params.postSlug);
+
+  return {
+    title: `پست ${post.title}`,
+  };
+}
 
 async function SinglePost({ params }) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/post/slug/${params.postSlug}`,
-  );
-  const { data } = await res.json();
-  const { post } = data || {};
+  const post = await getPostBySlug(params.postSlug);
 
   if (!post) notFound();
 
