@@ -8,7 +8,7 @@ import {
 
 function PostInteraction({ post }) {
   return (
-    <div className="flex items-center gap-x-4">
+    <div className="flex items-center gap-x-2">
       <ButtonIcon varient="secondary">
         <ChatBubbleOvalLeftEllipsisIcon />
         <span>{toPersianNumbers(post.commentsCount)}</span>

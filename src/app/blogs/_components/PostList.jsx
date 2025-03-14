@@ -1,9 +1,8 @@
 import CoverImage from "./CoverImage";
 import Link from "next/link";
 import PostAuthor from "./PostAuthor";
-import { ClockIcon } from "@heroicons/react/24/outline";
-import { toPersianNumbers } from "@/utils/toPersianNumbers";
 import PostInteraction from "./PostInteraction";
+import PostReadingTime from "./PostReadingTime";
 
 async function PostList() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/post/list`);
@@ -22,24 +21,17 @@ async function PostList() {
           <CoverImage {...post} />
 
           {/* Post Content */}
-          <div className="p-2 space-y-4">
+          <div className="space-y-4 p-2">
             <Link href={`/blogs/${post.slug}`}>
               <h2 className="font-bold text-secondary-700">{post.title}</h2>
             </Link>
 
             <div className="flex items-center justify-between">
               {/* Post Author */}
-              <PostAuthor {...post.author} />
+              <PostAuthor {...post.author} isTruncate />
 
               {/* Post Reading Time */}
-              <div className="flex items-center gap-1 text-[12px] text-secondary-500">
-                <ClockIcon className="h-4 w-4 stroke-secondary-500" />
-
-                <span className="text-nowrap">
-                  خواندن: <strong>{toPersianNumbers(post.readingTime)}</strong>{" "}
-                  دقیقه
-                </span>
-              </div>
+              <PostReadingTime time={post.readingTime} />
             </div>
 
             {/* Post Interactions */}
