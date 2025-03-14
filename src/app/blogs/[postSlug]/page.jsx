@@ -2,14 +2,16 @@ import Image from "next/image";
 import PostAuthor from "../_components/PostAuthor";
 import PostReadingTime from "../_components/PostReadingTime";
 import PostInteraction from "../_components/PostInteraction";
+import { notFound } from "next/navigation";
 
 async function SinglePost({ params }) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/post/slug/${params.postSlug}`,
   );
-  const {
-    data: { post },
-  } = await res.json();
+  const { data } = await res.json();
+  const { post } = data || {};
+
+  if (!post) notFound();
 
   return (
     <div className="mx-auto mb-10 max-w-screen-md space-y-6">
