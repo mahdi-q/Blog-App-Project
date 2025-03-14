@@ -3,6 +3,7 @@ import Link from "next/link";
 import PostAuthor from "./PostAuthor";
 import { ClockIcon } from "@heroicons/react/24/outline";
 import { toPersianNumbers } from "@/utils/toPersianNumbers";
+import PostInteraction from "./PostInteraction";
 
 async function PostList() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/post/list`);
@@ -21,11 +22,9 @@ async function PostList() {
           <CoverImage {...post} />
 
           {/* Post Content */}
-          <div className="p-2">
+          <div className="p-2 space-y-4">
             <Link href={`/blogs/${post.slug}`}>
-              <h2 className="mb-4 font-bold text-secondary-700">
-                {post.title}
-              </h2>
+              <h2 className="font-bold text-secondary-700">{post.title}</h2>
             </Link>
 
             <div className="flex items-center justify-between">
@@ -42,6 +41,9 @@ async function PostList() {
                 </span>
               </div>
             </div>
+
+            {/* Post Interactions */}
+            <PostInteraction post={post} />
           </div>
         </div>
       ))}
