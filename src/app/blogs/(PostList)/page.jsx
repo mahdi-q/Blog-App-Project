@@ -1,6 +1,6 @@
 import { Suspense } from "react";
-import PostList from "./_components/PostList";
 import Spinner from "@/ui/Spinner";
+import PostList from "../_components/PostList";
 
 async function BlogListPage() {
   return (
