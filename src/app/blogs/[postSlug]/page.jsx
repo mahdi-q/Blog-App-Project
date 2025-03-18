@@ -3,7 +3,15 @@ import PostAuthor from "../_components/PostAuthor";
 import PostReadingTime from "../_components/PostReadingTime";
 import PostInteraction from "../_components/PostInteraction";
 import { notFound } from "next/navigation";
-import { getPostBySlug } from "@/services/postServices";
+import { getAllPosts, getPostBySlug } from "@/services/postServices";
+
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const posts = await getAllPosts();
+
+  return posts.map((post) => ({ postSlug: post.slug }));
+}
 
 export async function generateMetadata({ params }) {
   const post = await getPostBySlug(params.postSlug);

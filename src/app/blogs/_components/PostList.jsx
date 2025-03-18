@@ -3,12 +3,10 @@ import Link from "next/link";
 import PostAuthor from "./PostAuthor";
 import PostInteraction from "./PostInteraction";
 import PostReadingTime from "./PostReadingTime";
+import { getAllPosts } from "@/services/postServices";
 
 async function PostList() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/post/list`);
-  const {
-    data: { posts },
-  } = await res.json();
+  const posts = await getAllPosts();
 
   return posts.length > 0 ? (
     <div className="grid grid-cols-12 gap-4 md:gap-6">
