@@ -5,6 +5,7 @@ import RHFTextField from "@/ui/RHFTextField";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Link from "next/link";
 
 const schema = yup
   .object({
@@ -20,6 +21,7 @@ function Signin() {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
+    mode: "onTouched",
   });
 
   const onSubmit = (values) => {
@@ -28,7 +30,9 @@ function Signin() {
 
   return (
     <div className="form">
-      <h1 className="text-lg font-bold text-secondary-800">ورود</h1>
+      <h1 className="text-lg font-bold text-secondary-800">
+        ورود به حساب کاربری
+      </h1>
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <RHFTextField
@@ -52,6 +56,10 @@ function Signin() {
 
         <Button className="mt-2 font-bold">ورود</Button>
       </form>
+
+      <Link href="/signup" className="text-secondary-600">
+        ایجاد حساب کاربری
+      </Link>
     </div>
   );
 }
