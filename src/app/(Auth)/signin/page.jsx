@@ -7,6 +7,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
+import Spinner from "@/ui/Spinner";
 
 const schema = yup
   .object({
@@ -19,13 +20,13 @@ const schema = yup
   .required();
 
 function Signin() {
-  const { isAuthenticated,signin } = useAuth();
+  const { isAuthenticated, signin } = useAuth();
 
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isLoading },
   } = useForm({
     resolver: yupResolver(schema),
     mode: "onTouched",
@@ -68,7 +69,13 @@ function Signin() {
           dir="ltr"
         />
 
-        <Button className="mt-2 font-bold">ورود</Button>
+        <div>
+          {isLoading ? (
+            <Spinner size="small" />
+          ) : (
+            <Button className="mt-2 w-full font-bold">ورود</Button>
+          )}
+        </div>
       </form>
 
       <Link href="/signup" className="text-secondary-600">

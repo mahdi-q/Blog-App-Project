@@ -7,6 +7,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
+import Spinner from "@/ui/Spinner";
 
 const schema = yup
   .object({
@@ -30,7 +31,7 @@ function Signup() {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isLoading },
   } = useForm({
     resolver: yupResolver(schema),
     mode: "onTouched",
@@ -62,7 +63,6 @@ function Signup() {
           errors={errors}
           isRequired
         />
-
         <RHFTextField
           label="ایمیل"
           name="email"
@@ -71,7 +71,6 @@ function Signup() {
           isRequired
           dir="ltr"
         />
-
         <RHFTextField
           label="رمز عبور"
           name="password"
@@ -81,8 +80,13 @@ function Signup() {
           type="password"
           dir="ltr"
         />
-
-        <Button className="mt-2 font-bold">ثبت نام</Button>
+        <div>
+          {isLoading ? (
+            <Spinner size="small" />
+          ) : (
+            <Button className="mt-2 w-full font-bold">ثبت نام</Button>
+          )}
+        </div>
       </form>
 
       <Link href="/signin" className="text-secondary-600">
