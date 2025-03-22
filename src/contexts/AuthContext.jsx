@@ -110,7 +110,7 @@ export default function AuthProvider({ children }) {
       dispatch({ type: "USER/LOADED", payload: user });
     } catch (error) {
       dispatch({ type: "REJECTED", payload: error });
-      toast.error(error?.response?.data?.message);
+      console.log(error?.response?.data?.message);
     }
   }
 
