@@ -6,6 +6,9 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
+import { signupApi } from "@/services/authServices";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const schema = yup
   .object({
@@ -15,22 +18,42 @@ const schema = yup
       .min(5, "نام باید بیشتر از ۵ کارکتر باشد")
       .max(30, "نام باید کمتر از ۳۰ کارکتر باشد"),
     email: yup.string().required("ایمیل الزامی است").email("ایمیل نامعتبر است"),
-    password: yup.string().required("رمز عبور الزامی است"),
+    password: yup
+      .string()
+      .required("رمز عبور الزامی است")
+      .min(8, "رمز عبور باید بیشتر از ۸ کارکتر باشد"),
   })
   .required();
 
 function Signup() {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
     mode: "onTouched",
   });
 
-  const onSubmit = (values) => {
-    console.log(values);
+  const onSubmit = async (values) => {
+    const userData = {
+      name: values.fullname,
+      email: values.email,
+      password: values.password,
+    };
+
+    try {
+      const { user, message } = await signupApi(userData);
+      
+      router.push("/profile");
+      toast.success(message);
+      reset();
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
   };
 
   return (

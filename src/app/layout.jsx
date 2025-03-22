@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import vazirFont from "@/constants/localFont";
 import "@/styles/globals.css";
+import { Toaster } from "react-hot-toast";
 
 export const metadata = {
   title: {
@@ -17,6 +18,8 @@ export default function RootLayout({ children }) {
         suppressHydrationWarning
         className={`${vazirFont.variable} font-sans`}
       >
+        <Toaster />
+
         <Header />
 
         <div className="container xl:max-w-screen-xl">{children}</div>
