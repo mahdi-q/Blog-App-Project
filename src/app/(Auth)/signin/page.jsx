@@ -6,9 +6,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
-import { signinApi } from "@/services/authServices";
-import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
+import { useAuth } from "@/contexts/AuthContext";
 
 const schema = yup
   .object({
@@ -21,7 +19,7 @@ const schema = yup
   .required();
 
 function Signin() {
-  const router = useRouter();
+  const { isAuthenticated,signin } = useAuth();
 
   const {
     register,
@@ -39,15 +37,9 @@ function Signin() {
       password: values.password,
     };
 
-    try {
-      const { user, message } = await signinApi(userData);
+    signin(userData);
 
-      router.push("/profile");
-      toast.success(message);
-      reset();
-    } catch (error) {
-      toast.error(error?.response?.data?.message);
-    }
+    if (isAuthenticated) reset();
   };
 
   return (

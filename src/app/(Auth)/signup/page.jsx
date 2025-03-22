@@ -6,9 +6,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
-import { signupApi } from "@/services/authServices";
-import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/AuthContext";
 
 const schema = yup
   .object({
@@ -26,7 +24,7 @@ const schema = yup
   .required();
 
 function Signup() {
-  const router = useRouter();
+  const { isAuthenticated, signup } = useAuth();
 
   const {
     register,
@@ -45,15 +43,9 @@ function Signup() {
       password: values.password,
     };
 
-    try {
-      const { user, message } = await signupApi(userData);
-      
-      router.push("/profile");
-      toast.success(message);
-      reset();
-    } catch (error) {
-      toast.error(error?.response?.data?.message);
-    }
+    signup(userData);
+
+    if (isAuthenticated) reset();
   };
 
   return (
