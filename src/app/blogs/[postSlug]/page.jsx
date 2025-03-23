@@ -4,6 +4,8 @@ import PostReadingTime from "../_components/PostReadingTime";
 import PostInteraction from "../_components/PostInteraction";
 import { notFound } from "next/navigation";
 import { getAllPosts, getPostBySlug } from "@/services/postServices";
+import { cookies } from "next/headers";
+import setCookiesOnReq from "@/utils/setCookiesOnReq";
 
 export const dynamicParams = false;
 
@@ -22,7 +24,9 @@ export async function generateMetadata({ params }) {
 }
 
 async function SinglePost({ params }) {
-  const post = await getPostBySlug(params.postSlug);
+  const cookiesStore = cookies();
+  const options = setCookiesOnReq(cookiesStore);
+  const post = await getPostBySlug(params.postSlug, options);
 
   if (!post) notFound();
 

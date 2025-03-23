@@ -4,9 +4,13 @@ import PostAuthor from "./PostAuthor";
 import PostInteraction from "./PostInteraction";
 import PostReadingTime from "./PostReadingTime";
 import { getAllPosts } from "@/services/postServices";
+import { cookies } from "next/headers";
+import setCookiesOnReq from "@/utils/setCookiesOnReq";
 
 async function PostList() {
-  const posts = await getAllPosts();
+  const cookiesStore = cookies();
+  const options = setCookiesOnReq(cookiesStore);
+  const posts = await getAllPosts(options);
 
   return posts.length > 0 ? (
     <div className="grid grid-cols-12 gap-4 md:gap-6">
