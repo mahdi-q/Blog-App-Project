@@ -78,10 +78,13 @@
 
 @layer components {
   .form {
-    @apply flex w-full max-w-lg flex-col gap-y-8 rounded-xl bg-secondary-0 p-4;
+    @apply flex max-w-lg flex-col items-center gap-y-8 rounded-xl border border-secondary-200 bg-secondary-0 p-6 shadow-md shadow-secondary-200 [&>form]:flex [&>form]:w-full [&>form]:flex-col [&>form]:gap-y-6;
   }
   .textField__input {
-    @apply w-full rounded-xl border border-secondary-100 bg-secondary-100 px-4 py-3 text-secondary-900 transition-all duration-300 ease-out hover:border-primary-500 focus:border-primary-500 focus:bg-secondary-0 focus:shadow-lg focus:shadow-primary-200 dark:focus:shadow-secondary-200;
+    @apply w-full rounded-lg border border-secondary-200 bg-secondary-100 px-4 py-3 text-secondary-900 transition-all duration-300 ease-out hover:border-primary-500 focus:border-primary-500 focus:bg-secondary-0 focus:shadow-lg focus:shadow-primary-200 dark:focus:shadow-secondary-200;
+  }
+  .textField--invalid {
+    @apply border-error bg-red-50 hover:border-error focus:border-error;
   }
   .btn {
     @apply rounded-lg border px-4 py-3 transition-all duration-300;
@@ -127,8 +130,8 @@
     width: 30px;
     aspect-ratio: 1;
     border-radius: 50%;
-    border: 4px solid rgb(var(--color-primary-200));
-    border-right-color: transparent;
+    border: 4px solid rgb(var(--color-primary-900));
+    border-right-color: rgb(var(--color-primary-200));
     animation: rotate 1s infinite linear;
   }
 
