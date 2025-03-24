@@ -1,15 +1,22 @@
-import { Suspense } from "react";
-import Spinner from "@/ui/Spinner";
 import PostList from "../_components/PostList";
-
-export const revalidate = 3600;
+import { cookies } from "next/headers";
+import setCookiesOnReq from "@/utils/setCookiesOnReq";
+import { getAllPosts } from "@/services/postServices";
 
 async function BlogListPage() {
+  const cookiesStore = cookies();
+  const options = setCookiesOnReq(cookiesStore);
+  const posts = await getAllPosts(options);
+
   return (
     <div>
-      <Suspense fallback={<Spinner />}>
-        <PostList />
-      </Suspense>
+      {posts.length === 0 ? (
+        <p className="text-lg font-bold text-secondary-600">
+          پستی برای نشان دادن وجود ندارد.
+        </p>
+      ) : (
+        <PostList posts={posts} />
+      )}
     </div>
   );
 }

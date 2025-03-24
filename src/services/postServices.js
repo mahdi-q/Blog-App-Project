@@ -1,8 +1,8 @@
 import http from "./httpServices";
 
-export async function getAllPosts(options) {
+export async function getAllPosts(queries, options) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/post/list`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/post/list?${queries}`,
     options,
   );
   const { data } = await res.json();

@@ -3,16 +3,9 @@ import Link from "next/link";
 import PostAuthor from "./PostAuthor";
 import PostInteraction from "./PostInteraction";
 import PostReadingTime from "./PostReadingTime";
-import { getAllPosts } from "@/services/postServices";
-import { cookies } from "next/headers";
-import setCookiesOnReq from "@/utils/setCookiesOnReq";
 
-async function PostList() {
-  const cookiesStore = cookies();
-  const options = setCookiesOnReq(cookiesStore);
-  const posts = await getAllPosts(options);
-
-  return posts.length > 0 ? (
+async function PostList({ posts }) {
+  return (
     <div className="grid grid-cols-12 gap-4 md:gap-6">
       {posts.map((post) => (
         <div
@@ -25,7 +18,9 @@ async function PostList() {
           {/* Post Content */}
           <div className="space-y-4 p-2">
             <Link href={`/blogs/${post.slug}`}>
-              <h2 className="font-bold text-secondary-700">{post.title}</h2>
+              <h2 className="font-bold text-secondary-700 hover:text-primary-900">
+                {post.title}
+              </h2>
             </Link>
 
             <div className="flex items-center justify-between">
@@ -42,6 +37,6 @@ async function PostList() {
         </div>
       ))}
     </div>
-  ) : null;
+  );
 }
 export default PostList;
