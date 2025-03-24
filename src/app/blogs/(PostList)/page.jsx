@@ -2,20 +2,40 @@ import PostList from "../_components/PostList";
 import { cookies } from "next/headers";
 import setCookiesOnReq from "@/utils/setCookiesOnReq";
 import { getAllPosts } from "@/services/postServices";
+import queryString from "query-string";
+import { toPersianNumbers } from "@/utils/toPersianNumbers";
 
-async function BlogListPage() {
+async function BlogListPage({ searchParams }) {
+  const queries = queryString.stringify(searchParams);
+
   const cookiesStore = cookies();
   const options = setCookiesOnReq(cookiesStore);
-  const posts = await getAllPosts(options);
+  const posts = await getAllPosts(queries, options);
+
+  const { search } = searchParams;
+
+  const searchMessage = search
+    ? `${toPersianNumbers(posts.length)} نتیجه برای "${search}" یافت شد.`
+    : "";
 
   return (
     <div>
       {posts.length === 0 ? (
         <p className="text-lg font-bold text-secondary-600">
-          پستی برای نشان دادن وجود ندارد.
+          {search
+            ? `هیچ نتیجه ای برای "${search}" یافت نشد.`
+            : "پستی برای نشان دادن وجود ندارد."}
         </p>
       ) : (
-        <PostList posts={posts} />
+        <div>
+          {searchMessage && (
+            <p className="mb-4 text-lg font-bold text-secondary-600">
+              {searchMessage}
+            </p>
+          )}
+
+          <PostList posts={posts} />
+        </div>
       )}
     </div>
   );
