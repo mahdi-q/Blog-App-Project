@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { getAllPosts, getPostBySlug } from "@/services/postServices";
 import { cookies } from "next/headers";
 import setCookiesOnReq from "@/utils/setCookiesOnReq";
+import RelatedPosts from "../_components/RelatedPosts";
 
 export const dynamicParams = false;
 
@@ -61,6 +62,9 @@ async function SinglePost({ params }) {
 
         <p>{post.text}</p>
       </div>
+
+      {/* Related Posts */}
+      {post.related.length > 0 && <RelatedPosts posts={post.related} />}
     </div>
   );
 }
