@@ -5,7 +5,7 @@ import PostReadingTime from "./PostReadingTime";
 
 function RelatedPosts({ posts }) {
   return (
-    <div className="mb-10 border-t border-dashed border-secondary-400 pt-4">
+    <div className="border-t border-dashed border-secondary-400 py-4">
       <h2 className="mb-4 text-xl font-bold text-secondary-700">پست های مرتبط</h2>
 
       <div className="grid grid-cols-12 gap-4">

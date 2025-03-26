@@ -7,6 +7,7 @@ import { getAllPosts, getPostBySlug } from "@/services/postServices";
 import { cookies } from "next/headers";
 import setCookiesOnReq from "@/utils/setCookiesOnReq";
 import RelatedPosts from "../_components/RelatedPosts";
+import PostComments from "../_components/Comments/PostComments";
 
 export const dynamicParams = false;
 
@@ -65,6 +66,9 @@ async function SinglePost({ params }) {
 
       {/* Related Posts */}
       {post.related.length > 0 && <RelatedPosts posts={post.related} />}
+
+      {/* Post Comments */}
+      <PostComments comments={post.comments} />
     </div>
   );
 }
