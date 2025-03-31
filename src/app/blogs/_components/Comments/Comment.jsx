@@ -2,7 +2,7 @@ import Avatar from "@/ui/Avatar";
 import Button from "@/ui/Button";
 import { ArrowUturnRightIcon } from "@heroicons/react/24/outline";
 
-function Comment({ comment }) {
+function Comment({ comment, onAddComment }) {
   return (
     <div>
       {/* Comment Header */}
@@ -26,6 +26,7 @@ function Comment({ comment }) {
         <div>
           {comment.openToComment && (
             <Button
+              onClick={onAddComment}
               variant="secondary"
               className="flex items-center gap-x-1 rounded-md p-2 text-sm"
             >

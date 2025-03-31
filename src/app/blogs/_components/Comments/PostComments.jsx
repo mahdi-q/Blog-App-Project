@@ -6,19 +6,26 @@ import Comment from "./Comment";
 import classNames from "classnames";
 import Modal from "@/ui/Modal";
 import { useState } from "react";
+import CommentForm from "./CommentForm";
 
 function PostComments({ comments }) {
   const [open, setOpen] = useState(false);
+  const [parent, setParent] = useState(null);
+
+  const addNewCommentHandler = (parent) => {
+    setParent(parent);
+    setOpen(true);
+  };
 
   return (
     <div className="py-2">
       <Modal
-        title="مدال تستی"
-        description="توضیحات مدال تستی"
+        title={parent ? "پاسخ به نظر" : "ثبت نظر جدید"}
+        description={parent ? parent.user.name : "نظر خود را وارد کنید"}
         open={open}
         onClose={() => setOpen(false)}
       >
-        <p>محتوای مدال تستی</p>
+        <CommentForm />
       </Modal>
 
       {/* Post Comments Header */}
@@ -28,7 +35,7 @@ function PostComments({ comments }) {
         <Button
           variant="outline"
           className="flex items-center py-2 text-sm"
-          onClick={() => setOpen(true)}
+          onClick={() => addNewCommentHandler(null)}
         >
           <ChatBubbleOvalLeftEllipsisIcon className="ml-2 h-5 w-5" />
           <span>ثبت نظر جدید</span>
@@ -42,7 +49,10 @@ function PostComments({ comments }) {
             <div key={comment._id}>
               {/* Main Comments */}
               <div className="mb-3 rounded-xl border border-secondary-200 p-2 sm:p-4">
-                <Comment comment={comment} />
+                <Comment
+                  comment={comment}
+                  onAddComment={() => addNewCommentHandler(comment)}
+                />
               </div>
 
               {/* Answer Comments */}

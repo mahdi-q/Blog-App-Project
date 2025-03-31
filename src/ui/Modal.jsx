@@ -19,12 +19,10 @@ function Modal({ title, description = "", open, onClose, children }) {
           {/* Modal Header */}
           <div className="mb-6 flex items-center justify-between border-b border-b-secondary-300 pb-2">
             <div>
-              <h3 className="font-bold text-secondary-800 lg:text-lg">
+              <h3 className="font-bold leading-6 text-secondary-800">
                 {title}
               </h3>
-              <p className="text-sm text-secondary-500 lg:text-base">
-                {description}
-              </p>
+              <p className="text-sm text-secondary-500">{description}</p>
             </div>
 
             <ButtonIcon onClick={onClose} varient="danger">
