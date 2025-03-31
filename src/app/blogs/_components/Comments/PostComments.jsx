@@ -8,7 +8,7 @@ import Modal from "@/ui/Modal";
 import { useState } from "react";
 import CommentForm from "./CommentForm";
 
-function PostComments({ comments }) {
+function PostComments({ comments, postId }) {
   const [open, setOpen] = useState(false);
   const [parent, setParent] = useState(null);
 
@@ -19,13 +19,14 @@ function PostComments({ comments }) {
 
   return (
     <div className="py-2">
+      {/* Post Comments Modal */}
       <Modal
         title={parent ? "پاسخ به نظر" : "ثبت نظر جدید"}
         description={parent ? parent.user.name : "نظر خود را وارد کنید"}
         open={open}
         onClose={() => setOpen(false)}
       >
-        <CommentForm />
+        <CommentForm postId={postId} parentId={parent ? parent._id : null} />
       </Modal>
 
       {/* Post Comments Header */}

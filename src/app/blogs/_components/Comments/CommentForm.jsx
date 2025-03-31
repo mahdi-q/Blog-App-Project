@@ -1,13 +1,17 @@
+import { createComment } from "@/lib/actions";
 import Button from "@/ui/Button";
 import TextArea from "@/ui/TextArea";
 import { useState } from "react";
 
-function CommentForm() {
+function CommentForm({ postId, parentId }) {
   const [text, setText] = useState("");
 
   return (
     <div className="mx-4">
-      <form className="w-full space-y-2">
+      <form
+        action={createComment.bind(null, postId, parentId)}
+        className="w-full space-y-2"
+      >
         <TextArea
           name="text"
           label="متن نظر"

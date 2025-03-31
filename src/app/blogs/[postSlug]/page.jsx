@@ -68,7 +68,7 @@ async function SinglePost({ params }) {
       {post.related.length > 0 && <RelatedPosts posts={post.related} />}
 
       {/* Post Comments */}
-      <PostComments comments={post.comments} />
+      <PostComments comments={post.comments} postId={post._id} />
     </div>
   );
 }
