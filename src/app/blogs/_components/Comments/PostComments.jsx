@@ -1,16 +1,35 @@
+"use client";
+
 import Button from "@/ui/Button";
 import { ChatBubbleOvalLeftEllipsisIcon } from "@heroicons/react/24/outline";
 import Comment from "./Comment";
 import classNames from "classnames";
+import Modal from "@/ui/Modal";
+import { useState } from "react";
 
 function PostComments({ comments }) {
+  const [open, setOpen] = useState(false);
+
   return (
     <div className="py-2">
+      <Modal
+        title="مدال تستی"
+        description="توضیحات مدال تستی"
+        open={open}
+        onClose={() => setOpen(false)}
+      >
+        <p>محتوای مدال تستی</p>
+      </Modal>
+
       {/* Post Comments Header */}
       <div className="mb-8 flex items-center justify-between gap-y-3">
         <h2 className="text-xl font-bold text-secondary-700">نظرات کاربران</h2>
 
-        <Button variant="outline" className="flex items-center py-2 text-sm">
+        <Button
+          variant="outline"
+          className="flex items-center py-2 text-sm"
+          onClick={() => setOpen(true)}
+        >
           <ChatBubbleOvalLeftEllipsisIcon className="ml-2 h-5 w-5" />
           <span>ثبت نظر جدید</span>
         </Button>
@@ -27,22 +46,24 @@ function PostComments({ comments }) {
               </div>
 
               {/* Answer Comments */}
-              <div className="post-comments__answer mr-2 space-y-3 sm:mr-8">
-                {comment.answers.map((answer, index) => (
-                  <div key={answer._id} className="relative">
-                    <div
-                      className={classNames(
-                        "answer-item rounded-xl border border-secondary-200/50 bg-secondary-100/50 p-2 sm:p-4",
-                        {
-                          "last-item": index + 1 === comment.answers.length,
-                        },
-                      )}
-                    >
-                      <Comment comment={answer} />
+              {comment.answers.length > 0 && (
+                <div className="post-comments__answer mr-2 space-y-3 sm:mr-8">
+                  {comment.answers.map((answer, index) => (
+                    <div key={answer._id} className="relative">
+                      <div
+                        className={classNames(
+                          "answer-item rounded-xl border border-secondary-200/50 bg-secondary-100/50 p-2 sm:p-4",
+                          {
+                            "last-item": index + 1 === comment.answers.length,
+                          },
+                        )}
+                      >
+                        <Comment comment={answer} />
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
           ))
         ) : (

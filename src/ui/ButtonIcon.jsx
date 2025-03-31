@@ -10,7 +10,7 @@ const btnType = {
 
   red: "bg-red-100 text-red-500 hover:bg-red-500 hover:text-red-100",
 
-  danger: "border border-red-100 text-red-500",
+  danger: "text-red-600 hover:bg-red-100",
 };
 
 function ButtonIcon({ children, onClick, className, varient, ...rest }) {
