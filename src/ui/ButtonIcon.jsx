@@ -1,6 +1,6 @@
 const btnType = {
   primary:
-    "bg-primary-100 text-primary-700 hover:bg-primary-900 hover:text-secondary-0",
+    "bg-primary-100 text-primary-700 hover:bg-primary-900 hover:text-primary-100",
 
   secondary:
     "bg-secondary-200 text-secondary-500 hover:bg-secondary-500 hover:text-secondary-0",
@@ -8,9 +8,9 @@ const btnType = {
   outline:
     "border border-secondary-200 text-secondary-500 hover:bg-secondary-200",
 
-  red: "bg-red-100 text-red-500 hover:bg-red-500 hover:text-secondary-0",
+  red: "bg-red-100 text-red-500 hover:bg-red-500 hover:text-red-100",
 
-  danger: "border border-red-100 text-red-500",
+  danger: "text-red-600 hover:bg-red-100",
 };
 
 function ButtonIcon({ children, onClick, className, varient, ...rest }) {

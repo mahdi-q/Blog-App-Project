@@ -1,12 +1,13 @@
-import PostList from "../_components/PostList";
-import { cookies } from "next/headers";
-import setCookiesOnReq from "@/utils/setCookiesOnReq";
 import { getAllPosts } from "@/services/postServices";
-import queryString from "query-string";
+import setCookiesOnReq from "@/utils/setCookiesOnReq";
 import { toPersianNumbers } from "@/utils/toPersianNumbers";
+import PostList from "app/blogs/_components/PostList";
+import { cookies } from "next/headers";
+import queryString from "query-string";
 
-async function BlogListPage({ searchParams }) {
-  const queries = queryString.stringify(searchParams);
+async function CategoryPage({ params, searchParams }) {
+  const categoryQuery = `categorySlug=${params.categorySlug}`;
+  const queries = `${queryString.stringify(searchParams)}&${categoryQuery}`;
 
   const cookiesStore = cookies();
   const options = setCookiesOnReq(cookiesStore);
@@ -24,7 +25,7 @@ async function BlogListPage({ searchParams }) {
         <p className="text-lg font-bold text-secondary-600">
           {search
             ? `هیچ نتیجه ای برای "${search}" یافت نشد.`
-            : "پستی برای نشان دادن وجود ندارد."}
+            : "پستی در این دسته بندی یافت نشد."}
         </p>
       ) : (
         <div>
@@ -40,4 +41,4 @@ async function BlogListPage({ searchParams }) {
     </div>
   );
 }
-export default BlogListPage;
+export default CategoryPage;
