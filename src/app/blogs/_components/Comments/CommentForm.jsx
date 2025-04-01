@@ -1,15 +1,38 @@
-import { createComment } from "@/lib/actions";
-import Button from "@/ui/Button";
-import TextArea from "@/ui/TextArea";
-import { useState } from "react";
+"use client";
 
-function CommentForm({ postId, parentId }) {
+import { createComment } from "@/lib/actions";
+import SubmitButton from "@/ui/SubmitButton";
+import TextArea from "@/ui/TextArea";
+import { useActionState, useEffect, useState } from "react";
+import toast from "react-hot-toast";
+
+const initialState = {
+  message: "",
+  error: "",
+};
+
+function CommentForm({ postId, parentId, onClose }) {
   const [text, setText] = useState("");
+
+  const [state, formAction] = useActionState(createComment, initialState);
+
+  useEffect(() => {
+    if (state?.message) {
+      toast.success(state.message);
+      onClose();
+    }
+
+    if (state?.error) {
+      toast.error(state.error);
+    }
+  }, [state]);
 
   return (
     <div className="mx-4">
       <form
-        action={createComment.bind(null, postId, parentId)}
+        action={async (formData) => {
+          await formAction({ formData, postId, parentId });
+        }}
         className="w-full space-y-2"
       >
         <TextArea
@@ -20,7 +43,9 @@ function CommentForm({ postId, parentId }) {
           isRequired
         />
 
-        <Button className="px-8 py-2">تایید</Button>
+        <SubmitButton className="w-full py-3 text-center text-secondary-0">
+          {parentId ? "ثبت پاسخ" : "ثبت نظر"}
+        </SubmitButton>
       </form>
     </div>
   );

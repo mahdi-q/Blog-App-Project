@@ -26,7 +26,11 @@ function PostComments({ comments, postId }) {
         open={open}
         onClose={() => setOpen(false)}
       >
-        <CommentForm postId={postId} parentId={parent ? parent._id : null} />
+        <CommentForm
+          postId={postId}
+          parentId={parent ? parent._id : null}
+          onClose={() => setOpen(false)}
+        />
       </Modal>
 
       {/* Post Comments Header */}
