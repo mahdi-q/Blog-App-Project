@@ -22,9 +22,7 @@ export default function RootLayout({ children }) {
         <AppProviders>
           <Toaster />
 
-          <Header />
-
-          <div className="container xl:max-w-screen-xl">{children}</div>
+          <main>{children}</main>
         </AppProviders>
       </body>
     </html>
