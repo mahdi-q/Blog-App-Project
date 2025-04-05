@@ -1,21 +1,35 @@
+"use client";
+
 import {
   ArrowLeftStartOnRectangleIcon,
   HomeIcon,
+  XMarkIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import SidebarNavs from "./SidebarNavs";
+import ButtonIcon from "@/ui/ButtonIcon";
 
-function ProfileSidebar() {
+function ProfileSidebar({ onClose = () => {} }) {
   return (
-    <div className="flex h-screen flex-col overflow-y-auto pt-10 lg:pt-2">
+    <div className="flex h-screen flex-col overflow-y-auto pt-6 lg:pt-2">
       {/* Sidebar Header */}
-      <Link
-        href="/"
-        className="mb-4 flex items-center justify-center gap-x-4 border-b border-b-secondary-200 pb-2 text-secondary-700 transition-all duration-300 ease-in-out hover:border-b-primary-200 hover:text-primary-900"
-      >
-        <HomeIcon className="h-6 w-6" />
-        <span>نکست بلاگ</span>
-      </Link>
+      <div className="mb-4 flex w-full items-center justify-between border-b border-b-secondary-200 pb-2 transition-all duration-300 ease-in-out hover:border-b-primary-200 lg:justify-center">
+        <Link
+          href="/"
+          className="flex items-center justify-center gap-x-4 text-secondary-700 hover:text-primary-900"
+        >
+          <HomeIcon className="h-6 w-6" />
+          <span>نکست بلاگ</span>
+        </Link>
+
+        <ButtonIcon
+          className="block border-none lg:hidden"
+          varient="outline"
+          onClick={onClose}
+        >
+          <XMarkIcon className="!h-5 !w-5" />
+        </ButtonIcon>
+      </div>
 
       {/* Sidebar Content */}
       <div className="flex-auto">
