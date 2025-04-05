@@ -1,6 +1,7 @@
 import { getAllPosts } from "@/services/postServices";
 import Empty from "@/ui/Empty";
 import Table from "@/ui/Table";
+import PostRow from "./PostRow";
 
 async function PostTable() {
   const posts = await getAllPosts();
@@ -21,7 +22,7 @@ async function PostTable() {
 
       <Table.Body>
         {posts.map((post, index) => (
-          <Table.Row></Table.Row>
+          <PostRow key={post._id} post={post} index={index} />
         ))}
       </Table.Body>
     </Table>
