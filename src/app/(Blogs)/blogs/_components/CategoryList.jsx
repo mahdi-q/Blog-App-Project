@@ -1,7 +1,4 @@
-import Link from "next/link";
-
-const listStyles =
-  "rounded p-2 pr-6 transition-colors duration-300 hover:bg-secondary-100 lg:ml-6";
+import CategoryItems from "./CategoryItems";
 
 async function CategoryList() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/category/list`);
@@ -10,19 +7,9 @@ async function CategoryList() {
   } = await res.json();
 
   return (
-    <ul className="space-y-1">
-      <li className={listStyles}>
-        <Link href="/blogs">همه</Link>
-      </li>
-
-      {categories.map((category) => (
-        <li key={category._id} className={listStyles}>
-          <Link href={`/blogs/category/${category.slug}`}>
-            {category.title}
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <div>
+      <CategoryItems categories={categories} />
+    </div>
   );
 }
 export default CategoryList;
