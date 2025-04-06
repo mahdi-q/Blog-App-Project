@@ -1,26 +1,24 @@
-import { fetchCardsData } from "@/services/dashboardData";
-import Card from "./_components/Card";
+import { Suspense } from "react";
 import PostTable from "./posts/_components/PostTable";
+import CardsWrapper from "./_components/CardsWrapper";
+import Fallback from "@/ui/Fallback";
 
-async function Profile() {
-  const { numberOfUsers, numberOfComments, numberOfPosts } =
-    await fetchCardsData();
-
+function Profile() {
   return (
     <div>
-      <div className="mb-8 grid gap-6 md:grid-cols-3">
-        <Card title="کاربران" value={numberOfUsers} type="users" />
-        <Card title="نظرات" value={numberOfComments} type="comments" />
-        <Card title="پست ها" value={numberOfPosts} type="posts" />
-      </div>
+      <h1 className="mb-4 text-xl font-bold text-secondary-800">داشبورد</h1>
 
-      <div>
-        <h2 className="mb-4 text-lg font-bold text-secondary-800">
-          لیست آخرین پست ها
-        </h2>
-        
+      <Suspense fallback={<Fallback />}>
+        <CardsWrapper />
+      </Suspense>
+
+      <h2 className="mb-4 text-lg font-medium text-secondary-800">
+        لیست آخرین پست ها
+      </h2>
+
+      <Suspense fallback={<Fallback />}>
         <PostTable queries="sort=latest&limit=5" />
-      </div>
+      </Suspense>
     </div>
   );
 }

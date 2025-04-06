@@ -1,11 +1,15 @@
+import { Suspense } from "react";
 import PostTable from "./_components/PostTable";
+import Fallback from "@/ui/Fallback";
 
 function PostsPage() {
   return (
     <div>
-      <h2 className="mb-4 text-lg font-bold text-secondary-800">لیست پست ها</h2>
+      <h1 className="mb-4 text-xl font-bold text-secondary-800">لیست پست ها</h1>
 
-      <PostTable />
+      <Suspense fallback={<Fallback />}>
+        <PostTable />
+      </Suspense>
     </div>
   );
 }
