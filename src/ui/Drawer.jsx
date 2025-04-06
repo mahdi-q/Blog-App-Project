@@ -5,13 +5,13 @@ function Drawer({ open, onClose, children }) {
     <>
       {/* Drawer Backdrop */}
       <div
-        className={`fixed inset-0 h-screen w-full bg-secondary-800 bg-opacity-30 backdrop-blur-sm ${open ? "block" : "pointer-events-none hidden"}`}
+        className={`fixed inset-0 z-50 h-screen w-full bg-secondary-800 bg-opacity-30 backdrop-blur-sm ${open ? "block" : "pointer-events-none hidden"}`}
         onClick={onClose}
       ></div>
 
       {/* Drawer Content */}
       <div
-        className={`fixed right-0 top-0 h-full w-[250px] transform transition-transform ${open ? "translate-x-0" : "translate-x-full"}`}
+        className={`fixed right-0 top-0 z-50 h-full w-[250px] transform transition-transform ${open ? "translate-x-0" : "translate-x-full"}`}
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
