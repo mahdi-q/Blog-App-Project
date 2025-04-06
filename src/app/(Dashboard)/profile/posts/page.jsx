@@ -4,9 +4,13 @@ import Fallback from "@/ui/Fallback";
 import SearchBox from "@/ui/SearchBox";
 import { CreatePost } from "./_components/Buttons";
 import queryString from "query-string";
+import Pagination from "@/ui/Pagination";
+import { getAllPosts } from "@/services/postServices";
 
-function PostsPage({ searchParams }) {
+async function PostsPage({ searchParams }) {
   const queries = queryString.stringify(searchParams);
+
+  const { totalPages } = await getAllPosts(queries);
 
   return (
     <div>
@@ -25,6 +29,10 @@ function PostsPage({ searchParams }) {
       <Suspense fallback={<Fallback />}>
         <PostTable queries={queries} key={queries} />
       </Suspense>
+
+      <div className="mt-5 flex w-full items-center justify-center">
+        <Pagination totalPages={totalPages} />
+      </div>
     </div>
   );
 }
