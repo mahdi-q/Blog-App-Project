@@ -33,9 +33,9 @@ function ProfileSidebar({ onClose = () => {} }) {
 
       {/* Sidebar Content */}
       <div className="flex-auto">
-        <SidebarNavs />
+        <SidebarNavs onClose={onClose} />
 
-        <div className="flex w-full cursor-pointer items-center gap-x-4 rounded-lg py-3 pr-3 font-medium text-secondary-700 transition-all duration-300 ease-in-out hover:bg-secondary-100/80 hover:text-red-400">
+        <div className="flex w-full cursor-pointer items-center gap-x-4 rounded-lg py-3 pr-3 text-secondary-700 transition-all duration-300 ease-in-out hover:bg-secondary-100/80 hover:text-red-400">
           <ArrowLeftStartOnRectangleIcon className="h-5 w-5" />
           <span>خروج</span>
         </div>

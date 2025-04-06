@@ -37,7 +37,7 @@ const sidebarNavs = [
   },
 ];
 
-function SidebarNavs() {
+function SidebarNavs({ onClose }) {
   const pathname = usePathname();
 
   return (
@@ -46,6 +46,7 @@ function SidebarNavs() {
         <li key={nav.id}>
           <Link
             href={nav.href}
+            onClick={onClose}
             className={classNames(
               "flex w-full items-center gap-x-4 rounded-lg py-3 pr-3 text-secondary-700 transition-all duration-300 ease-in-out hover:bg-secondary-100/80 [&>svg]:h-5 [&>svg]:w-5",
               {
