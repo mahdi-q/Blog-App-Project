@@ -3,8 +3,8 @@ import Empty from "@/ui/Empty";
 import Table from "@/ui/Table";
 import PostRow from "./PostRow";
 
-async function PostTable() {
-  const posts = await getAllPosts();
+async function PostTable({ queries = "" }) {
+  const posts = await getAllPosts(queries);
 
   if (posts.length === 0) return <Empty resourceName="پستی" />;
 

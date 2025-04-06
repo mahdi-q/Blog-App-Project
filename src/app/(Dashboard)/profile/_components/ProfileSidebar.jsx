@@ -11,7 +11,7 @@ import ButtonIcon from "@/ui/ButtonIcon";
 
 function ProfileSidebar({ onClose = () => {} }) {
   return (
-    <div className="flex h-screen flex-col overflow-y-auto pt-6 lg:pt-2">
+    <div className="flex h-screen flex-col overflow-y-auto pt-6">
       {/* Sidebar Header */}
       <div className="mb-4 flex w-full items-center justify-between border-b border-b-secondary-200 pb-2 transition-all duration-300 ease-in-out hover:border-b-primary-200 lg:justify-center">
         <Link
