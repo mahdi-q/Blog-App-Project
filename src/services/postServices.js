@@ -6,7 +6,7 @@ export async function getAllPosts(queries, options) {
     options,
   );
   const { data } = await res.json();
-  const { posts } = data || {};
+  const { posts, totalPages } = data || {};
 
   // const data = await http
   //   .get("/post/list", { cache: "force-cache" })
@@ -14,7 +14,7 @@ export async function getAllPosts(queries, options) {
 
   // const { posts } = data || {};
 
-  return posts;
+  return { posts, totalPages };
 }
 
 export async function getPostBySlug(slug, options) {

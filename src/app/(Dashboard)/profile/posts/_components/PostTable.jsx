@@ -4,7 +4,7 @@ import Table from "@/ui/Table";
 import PostRow from "./PostRow";
 
 async function PostTable({ queries = "" }) {
-  const posts = await getAllPosts(queries);
+  const {posts} = await getAllPosts(queries);
 
   if (posts.length === 0) return <Empty resourceName="پستی" />;
 

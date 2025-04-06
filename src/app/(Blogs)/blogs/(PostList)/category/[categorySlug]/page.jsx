@@ -11,7 +11,7 @@ async function CategoryPage({ params, searchParams }) {
 
   const cookiesStore = cookies();
   const options = setCookiesOnReq(cookiesStore);
-  const posts = await getAllPosts(queries, options);
+  const {posts} = await getAllPosts(queries, options);
 
   const { search } = searchParams;
 
