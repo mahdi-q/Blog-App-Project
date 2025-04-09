@@ -1,5 +1,6 @@
 "use client";
 
+import Header from "@/components/Header";
 import useMoveBack from "@/hooks/useMoveBack";
 import Button from "@/ui/Button";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
@@ -9,6 +10,8 @@ function NotFound() {
 
   return (
     <div className="h-screen">
+      <Header />
+
       <div className="container xl:max-w-screen-xl">
         <div className="flex flex-col items-center justify-center pt-10">
           <h1 className="mb-8 text-xl font-bold text-secondary-800">

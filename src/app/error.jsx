@@ -1,11 +1,14 @@
 "use client";
 
+import Header from "@/components/Header";
 import Button from "@/ui/Button";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 
 function Error({ error, reset }) {
   return (
     <div className="h-screen">
+      <Header />
+
       <div className="container xl:max-w-screen-xl">
         <div className="flex flex-col items-center justify-center pt-10">
           <p className="mb-8 text-xl font-bold text-red-500">{error.message}</p>
