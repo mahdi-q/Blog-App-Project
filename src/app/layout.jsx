@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import vazirFont from "@/constants/localFont";
 import AppProviders from "@/providers/AppProviders";
 import "@/styles/globals.css";

@@ -15,11 +15,7 @@ function RHFSelect({ label, name, register, isRequired, options }) {
           {...register(name)}
         >
           {options.map((option) => (
-            <option
-              className="bg-red-100"
-              key={option.value}
-              value={option.value}
-            >
+            <option key={option.value} value={option.value}>
               {option.label}
             </option>
           ))}

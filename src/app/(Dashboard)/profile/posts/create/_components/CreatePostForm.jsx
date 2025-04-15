@@ -1,5 +1,6 @@
 "use client";
 
+import { useCategories } from "@/hooks/useCategories";
 import RHFSelect from "@/ui/RHFSelect";
 import RHFTextField from "@/ui/RHFTextField";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -27,6 +28,8 @@ function CreatePostForm() {
     resolver: yupResolver(schema),
     mode: "onTouched",
   });
+
+  const { categories } = useCategories();
 
   return (
     <form className="post__form">
@@ -77,20 +80,7 @@ function CreatePostForm() {
         register={register}
         errors={errors}
         isRequired
-        options={[
-          {
-            label: "ورزشی",
-            value: null,
-          },
-          {
-            label: "تاریخی",
-            value: 2,
-          },
-          {
-            label: "ورزشی",
-            value: 3,
-          },
-        ]}
+        options={categories}
       />
     </form>
   );
