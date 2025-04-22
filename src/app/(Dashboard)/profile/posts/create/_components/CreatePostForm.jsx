@@ -1,10 +1,15 @@
 "use client";
 
 import { useCategories } from "@/hooks/useCategories";
+import ButtonIcon from "@/ui/ButtonIcon";
+import FileInput from "@/ui/FileInput";
 import RHFSelect from "@/ui/RHFSelect";
 import RHFTextField from "@/ui/RHFTextField";
+import { TrashIcon } from "@heroicons/react/24/outline";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
+import Image from "next/image";
+import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 
 const schema = yup.object({
@@ -19,10 +24,14 @@ const schema = yup.object({
 });
 
 function CreatePostForm() {
+  const [coverImageUrl, setCoverImageUrl] = useState(null);
+
   const {
     register,
+    control,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -82,6 +91,48 @@ function CreatePostForm() {
         isRequired
         options={categories}
       />
+
+      <Controller
+        name="coverImage"
+        control={control}
+        rules={{ required: "کاور پست الزامی است" }}
+        render={({ field: { value, onChange, ...rest } }) => (
+          <FileInput
+            label="انتخاب کاور پست"
+            name="coverPost"
+            value={value?.fileName}
+            onChange={(event) => {
+              const file = event.target.files[0];
+              onChange(file);
+              setCoverImageUrl(URL.createObjectURL(file));
+              event.target.value = null;
+            }}
+            {...rest}
+          />
+        )}
+      />
+
+      {coverImageUrl && (
+        <div className="relative aspect-video overflow-hidden rounded-lg">
+          <Image
+            fill
+            alt="cover-image"
+            src={coverImageUrl}
+            className="object-cover object-center"
+          />
+
+          <ButtonIcon
+            varient="red"
+            className="absolute bottom-2 left-2"
+            onClick={() => {
+              setCoverImageUrl(null);
+              setValue("coverImage", null);
+            }}
+          >
+            <TrashIcon />
+          </ButtonIcon>
+        </div>
+      )}
     </form>
   );
 }
