@@ -10,7 +10,8 @@ function AppProviders({ children }) {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
-      <AuthProvider>{children}</AuthProvider>;
+
+      <AuthProvider>{children}</AuthProvider>
     </QueryClientProvider>
   );
 }

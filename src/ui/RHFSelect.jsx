@@ -10,7 +10,7 @@ function RHFSelect({ label, name, register, isRequired, options }) {
 
       <div className="textField__input relative">
         <select
-          className="w-full appearance-none bg-transparent"
+          className="w-full appearance-none bg-transparent px-2"
           id={name}
           {...register(name)}
         >

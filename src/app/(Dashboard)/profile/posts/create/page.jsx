@@ -3,7 +3,7 @@ import CreatePostForm from "./_components/CreatePostForm";
 
 function CreatePostPage() {
   return (
-    <div>
+    <div className="mb-12">
       <Breadcrumbs
         breadcrumbs={[
           {
@@ -18,7 +18,9 @@ function CreatePostPage() {
         ]}
       />
 
-      <h1 className="text-xl font-bold text-secondary-800 mb-4">ایجاد پست جدید</h1>
+      <h1 className="mb-4 text-xl font-bold text-secondary-800">
+        ایجاد پست جدید
+      </h1>
 
       <CreatePostForm />
     </div>
