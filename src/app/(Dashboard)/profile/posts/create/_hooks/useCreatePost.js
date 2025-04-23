@@ -1,0 +1,24 @@
+import { createPostApi } from "@/services/postServices";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import toast from "react-hot-toast";
+
+export default function useCreatePost() {
+  const queryClient = useQueryClient();
+
+  const { isPending: isCreating, mutate: createPost } = useMutation({
+    mutationFn: createPostApi,
+
+    onSuccess: () => {
+      toast.success("پست با موفقیت ایجاد شد");
+      queryClient.invalidateQueries({
+        queryKey: ["posts"],
+      });
+    },
+
+    onError: (err) => {
+      toast.error(err?.response?.data?.message);
+    },
+  });
+
+  return { isCreating, createPost };
+}

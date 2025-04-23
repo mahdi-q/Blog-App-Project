@@ -1,7 +1,6 @@
 "use client";
 
 import { useCategories } from "@/hooks/useCategories";
-import Button from "@/ui/Button";
 import ButtonIcon from "@/ui/ButtonIcon";
 import FileInput from "@/ui/FileInput";
 import RHFSelect from "@/ui/RHFSelect";
@@ -12,28 +11,37 @@ import Image from "next/image";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
+import useCreatePost from "../_hooks/useCreatePost";
+import { useRouter } from "next/navigation";
+import SubmitButton from "@/ui/SubmitButton";
 
 const schema = yup.object({
   title: yup
     .string()
     .required("عنوان الزامی است")
     .min(5, "عنوان باید حداقل ۵ کاراکتر باشد"),
+
   briefText: yup
     .string()
     .required("خلاصه متن الزامی است")
     .min(10, "خلاصه متن باید حداقل ۱۰ کاراکتر باشد"),
+
   text: yup
     .string()
     .required("متن الزامی است")
     .min(10, "متن باید حداقل ۱۰ کاراکتر باشد"),
+
   slug: yup.string().required("اسلاگ الزامی است"),
+
   readingTime: yup
     .number()
     .positive("زمان مطالعه باید عدد مثبت باشد")
     .integer("زمان مطالعه باید عدد صحیح باشد")
     .typeError("زمان مطالعه باید فقط عدد باشد")
     .required("زمان مطالعه الزامی است"),
+
   category: yup.string().required("دسته بندی الزامی است"),
+
   coverImage: yup
     .mixed()
     .test("required", "کاور پست الزامی است", (value) => {
@@ -52,9 +60,15 @@ const schema = yup.object({
 function CreatePostForm() {
   const [coverImageUrl, setCoverImageUrl] = useState(null);
 
+  const router = useRouter();
+
+  const { categories } = useCategories();
+
+  const { isCreating, createPost } = useCreatePost();
+
   const {
-    register,
     control,
+    register,
     handleSubmit,
     reset,
     setValue,
@@ -64,10 +78,20 @@ function CreatePostForm() {
     mode: "onTouched",
   });
 
-  const { categories } = useCategories();
-
   const onSubmit = (data) => {
-    console.log(data);
+    const formData = new FormData();
+
+    for (const key in data) {
+      formData.append(key, data[key]);
+    }
+
+    createPost(formData, {
+      onSuccess: () => {
+        reset();
+        setCoverImageUrl(null);
+        router.push("/profile/posts");
+      },
+    });
   };
 
   return (
@@ -173,9 +197,12 @@ function CreatePostForm() {
         </div>
       )}
 
-      <Button className="lg:col-start-2 lg:row-start-5 lg:w-1/2 lg:justify-self-end">
+      <SubmitButton
+        isLoading={isCreating}
+        className="lg:col-start-2 lg:row-start-5 lg:w-1/2 lg:justify-self-end"
+      >
         تایید
-      </Button>
+      </SubmitButton>
     </form>
   );
 }
