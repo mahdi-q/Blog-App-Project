@@ -8,12 +8,14 @@ import RHFTextField from "@/ui/RHFTextField";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import useCreatePost from "../_hooks/useCreatePost";
 import { useRouter } from "next/navigation";
 import SubmitButton from "@/ui/SubmitButton";
+import useEditPost from "../../[postId]/edit/_hooks/useEditPost";
+import { imageUrlToFile } from "@/utils/fileFormatter";
 
 const schema = yup.object({
   title: yup
@@ -57,14 +59,41 @@ const schema = yup.object({
     }),
 });
 
-function CreatePostForm() {
-  const [coverImageUrl, setCoverImageUrl] = useState(null);
+function CreatePostForm({ postToEdit = {} }) {
+  const editId = postToEdit._id;
+  const isEditMode = Boolean(editId);
+  const {
+    title,
+    briefText,
+    text,
+    slug,
+    readingTime,
+    category,
+    coverImage,
+    coverImageUrl: prevCoverImageUrl,
+  } = postToEdit;
+
+  const [coverImageUrl, setCoverImageUrl] = useState(prevCoverImageUrl || null);
 
   const router = useRouter();
 
   const { categories } = useCategories();
 
   const { isCreating, createPost } = useCreatePost();
+  const { isEditing, editPost } = useEditPost();
+
+  let editValues = {};
+  if (isEditMode) {
+    editValues = {
+      title,
+      briefText,
+      text,
+      slug,
+      readingTime,
+      category: category._id,
+      coverImage,
+    };
+  }
 
   const {
     control,
@@ -76,7 +105,19 @@ function CreatePostForm() {
   } = useForm({
     resolver: yupResolver(schema),
     mode: "onTouched",
+    defaultValues: editValues,
   });
+
+  useEffect(() => {
+    if (prevCoverImageUrl) {
+      async function changeImage() {
+        const file = await imageUrlToFile(prevCoverImageUrl);
+        setValue("coverImage", file);
+      }
+
+      changeImage();
+    }
+  }, [editId]);
 
   const onSubmit = (data) => {
     const formData = new FormData();
@@ -85,13 +126,26 @@ function CreatePostForm() {
       formData.append(key, data[key]);
     }
 
-    createPost(formData, {
-      onSuccess: () => {
-        reset();
-        setCoverImageUrl(null);
-        router.push("/profile/posts");
-      },
-    });
+    if (isEditMode) {
+      editPost(
+        { id: editId, postData: formData },
+        {
+          onSuccess: () => {
+            reset();
+            setCoverImageUrl(null);
+            router.push("/profile/posts");
+          },
+        },
+      );
+    } else {
+      createPost(formData, {
+        onSuccess: () => {
+          reset();
+          setCoverImageUrl(null);
+          router.push("/profile/posts");
+        },
+      });
+    }
   };
 
   return (
@@ -198,7 +252,7 @@ function CreatePostForm() {
       )}
 
       <SubmitButton
-        isLoading={isCreating}
+        isLoading={isCreating || isEditing}
         className="lg:col-start-2 lg:row-start-5 lg:w-1/2 lg:justify-self-end"
       >
         تایید

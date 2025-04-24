@@ -34,6 +34,10 @@ export async function getPostBySlug(slug, options) {
   return post;
 }
 
+export async function getPostById(postId) {
+  return http.get(`/post/${postId}`).then(({ data }) => data.data);
+}
+
 export async function likePostApi(postId) {
   return http.post(`/post/like/${postId}`).then(({ data }) => data.data);
 }
@@ -44,4 +48,10 @@ export async function bookmarkPostApi(postId) {
 
 export async function createPostApi(postData) {
   return http.post("/post/create", postData).then(({ data }) => data.data);
+}
+
+export async function editPostApi({ id, postData }) {
+  return http
+    .patch(`/post/update/${id}`, postData)
+    .then(({ data }) => data.data);
 }

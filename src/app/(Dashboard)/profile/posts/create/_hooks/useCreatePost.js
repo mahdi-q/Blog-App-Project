@@ -8,15 +8,15 @@ export default function useCreatePost() {
   const { isPending: isCreating, mutate: createPost } = useMutation({
     mutationFn: createPostApi,
 
-    onSuccess: () => {
-      toast.success("پست با موفقیت ایجاد شد");
+    onSuccess: (data) => {
+      toast.success(data?.message || "پست با موفقیت ایجاد شد");
       queryClient.invalidateQueries({
         queryKey: ["posts"],
       });
     },
 
     onError: (err) => {
-      toast.error(err?.response?.data?.message);
+      toast.error(err?.response?.data?.message || "ایجاد پست با خطا مواجه شد");
     },
   });
 
