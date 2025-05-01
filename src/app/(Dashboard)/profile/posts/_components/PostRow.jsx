@@ -41,7 +41,7 @@ function PostRow({ post, index }) {
         <div className="flex items-center justify-center gap-x-1">
           <UpdatePost id={post._id} />
 
-          <DeletePost id={post._id} />
+          <DeletePost post={post} />
         </div>
       </td>
     </Table.Row>
