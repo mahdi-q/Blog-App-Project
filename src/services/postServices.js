@@ -55,3 +55,7 @@ export async function editPostApi({ id, postData }) {
     .patch(`/post/update/${id}`, postData)
     .then(({ data }) => data.data);
 }
+
+export async function deletePostApi(postId) {
+  return http.delete(`/post/remove/${postId}`).then(({ data }) => data.data);
+}

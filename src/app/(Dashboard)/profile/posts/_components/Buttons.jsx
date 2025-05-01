@@ -11,6 +11,8 @@ import {
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useState } from "react";
+import useDeletePost from "../_hooks/useDeletePost";
+import { useRouter } from "next/navigation";
 
 export function CreatePost() {
   return (
@@ -43,6 +45,10 @@ export function UpdatePost({ id }) {
 export function DeletePost({ post: { _id, title } }) {
   const [open, setOpen] = useState(false);
 
+  const router = useRouter();
+
+  const { isDeleting, deletePost } = useDeletePost();
+
   return (
     <>
       <ButtonIcon
@@ -61,9 +67,16 @@ export function DeletePost({ post: { _id, title } }) {
         <ConfirmDelete
           resourceName={`پست ${title}`}
           onClose={() => setOpen(false)}
+          disabled={isDeleting}
           onConfirm={(e) => {
             e.preventDefault();
-            setOpen(false);
+
+            deletePost(_id, {
+              onSuccess: () => {
+                router.refresh("/profile/posts");
+                setOpen(false);
+              },
+            });
           }}
         />
       </Modal>
