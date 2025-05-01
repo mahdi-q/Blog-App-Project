@@ -6,7 +6,7 @@ export async function getAllPosts(queries, options) {
     options,
   );
   const { data } = await res.json();
-  const { posts } = data || {};
+  const { posts, totalPages } = data || {};
 
   // const data = await http
   //   .get("/post/list", { cache: "force-cache" })
@@ -14,7 +14,7 @@ export async function getAllPosts(queries, options) {
 
   // const { posts } = data || {};
 
-  return posts;
+  return { posts, totalPages };
 }
 
 export async function getPostBySlug(slug, options) {
@@ -34,10 +34,28 @@ export async function getPostBySlug(slug, options) {
   return post;
 }
 
+export async function getPostById(postId) {
+  return http.get(`/post/${postId}`).then(({ data }) => data.data);
+}
+
 export async function likePostApi(postId) {
   return http.post(`/post/like/${postId}`).then(({ data }) => data.data);
 }
 
 export async function bookmarkPostApi(postId) {
   return http.post(`/post/bookmark/${postId}`).then(({ data }) => data.data);
+}
+
+export async function createPostApi(postData) {
+  return http.post("/post/create", postData).then(({ data }) => data.data);
+}
+
+export async function editPostApi({ id, postData }) {
+  return http
+    .patch(`/post/update/${id}`, postData)
+    .then(({ data }) => data.data);
+}
+
+export async function deletePostApi(postId) {
+  return http.delete(`/post/remove/${postId}`).then(({ data }) => data.data);
 }

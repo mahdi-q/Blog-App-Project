@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import vazirFont from "@/constants/localFont";
 import AppProviders from "@/providers/AppProviders";
 import "@/styles/globals.css";
@@ -22,9 +21,7 @@ export default function RootLayout({ children }) {
         <AppProviders>
           <Toaster />
 
-          <Header />
-
-          <div className="container xl:max-w-screen-xl">{children}</div>
+          <main>{children}</main>
         </AppProviders>
       </body>
     </html>
