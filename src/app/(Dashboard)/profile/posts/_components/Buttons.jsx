@@ -16,7 +16,7 @@ import { useRouter } from "next/navigation";
 
 export function CreatePost() {
   return (
-    <Link href="/profile/posts/create">
+    <Link className="inline-block" href="/profile/posts/create">
       <Button
         varient="primary"
         className="flex items-center gap-x-2 justify-self-end py-2 lg:px-6 lg:py-3"

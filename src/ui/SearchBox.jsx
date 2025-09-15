@@ -15,8 +15,6 @@ function SearchBox() {
 
     const newParams = new URLSearchParams(searchParams.toString());
 
-    newParams.set("page", 1);
-
     if (searchValue) {
       newParams.set("search", searchValue);
     } else {
@@ -33,7 +31,7 @@ function SearchBox() {
         name="search"
         placeholder="جستجو ..."
         autoComplete="off"
-        className="textField__input bg-secondary-0 py-3 text-xs"
+        className="textField__input bg-secondary-0 py-3 text-sm"
       />
 
       <button
