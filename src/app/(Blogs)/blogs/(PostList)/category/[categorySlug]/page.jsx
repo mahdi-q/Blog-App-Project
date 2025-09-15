@@ -1,4 +1,4 @@
-import { getAllPosts } from "@/services/postServices";
+import { getAllPostsApi } from "@/services/postServices";
 import setCookiesOnReq from "@/utils/setCookiesOnReq";
 import { toPersianNumbers } from "@/utils/toPersianNumbers";
 import PostList from "app/(Blogs)/blogs/_components/PostList";
@@ -11,7 +11,7 @@ async function CategoryPage({ params, searchParams }) {
 
   const cookiesStore = cookies();
   const options = setCookiesOnReq(cookiesStore);
-  const {posts} = await getAllPosts(queries, options);
+  const { posts } = await getAllPostsApi(queries, options);
 
   const { search } = searchParams;
 

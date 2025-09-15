@@ -1,7 +1,7 @@
 import PostList from "../_components/PostList";
 import { cookies } from "next/headers";
 import setCookiesOnReq from "@/utils/setCookiesOnReq";
-import { getAllPosts } from "@/services/postServices";
+import { getAllPostsApi } from "@/services/postServices";
 import queryString from "query-string";
 import { toPersianNumbers } from "@/utils/toPersianNumbers";
 
@@ -10,7 +10,7 @@ async function BlogListPage({ searchParams }) {
 
   const cookiesStore = cookies();
   const options = setCookiesOnReq(cookiesStore);
-  const {posts} = await getAllPosts(queries, options);
+  const {posts} = await getAllPostsApi(queries, options);
 
   const { search } = searchParams;
 

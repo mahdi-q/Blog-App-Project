@@ -1,41 +1,27 @@
 import http from "./httpServices";
 
-export async function getAllPosts(queries, options) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/post/list?${queries}`,
-    options,
-  );
-  const { data } = await res.json();
+export async function getAllPostsApi(queries, options) {
+  const data = await http
+    .get(`/post/list?${queries}`, options)
+    .then(({ data }) => data.data);
+
   const { posts, totalPages } = data || {};
-
-  // const data = await http
-  //   .get("/post/list", { cache: "force-cache" })
-  //   .then(({ data }) => data.data);
-
-  // const { posts } = data || {};
 
   return { posts, totalPages };
 }
 
-export async function getPostBySlug(slug, options) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/post/slug/${slug}`,
-    options,
-  );
-  const { data } = await res.json();
+export async function getPostBySlugApi(slug, options) {
+  const data = await http
+    .get(`/post/slug/${slug}`, options)
+    .then(({ data }) => data.data);
+
   const { post } = data || {};
-
-  // const data = await http
-  //   .get(`/post/slug/${slug}`)
-  //   .then(({ data }) => data.data);
-
-  // const { post } = data || {};
 
   return post;
 }
 
-export async function getPostById(postId) {
-  return http.get(`/post/${postId}`).then(({ data }) => data.data);
+export async function getPostByIdApi(postId, options) {
+  return http.get(`/post/${postId}`, options).then(({ data }) => data.data);
 }
 
 export async function likePostApi(postId) {

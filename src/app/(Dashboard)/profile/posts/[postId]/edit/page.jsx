@@ -1,10 +1,10 @@
 import Breadcrumbs from "@/ui/Breadcrumbs";
-import { getPostById } from "@/services/postServices";
+import { getPostByIdApi } from "@/services/postServices";
 import { notFound } from "next/navigation";
 import CreatePostForm from "../../create/_components/CreatePostForm";
 
 async function EditPostPage({ params: { postId } }) {
-  const { post } = await getPostById(postId);
+  const { post } = await getPostByIdApi(postId);
 
   if (!post) {
     notFound();

@@ -1,14 +1,14 @@
 import { getAllCategoriesApi } from "@/services/categoryServices";
 import { useQuery } from "@tanstack/react-query";
 
-export function useCategories() {
+export function useGetCategories(queries) {
   const { data, isLoading } = useQuery({
-    queryKey: ["categories"],
-    queryFn: getAllCategoriesApi,
+    queryKey: ["categories", queries],
+    queryFn: () => getAllCategoriesApi(queries),
   });
 
   // {_id, title, englishTitle, ...}
-  const { categories: rawCategories = [] } = data || {};
+  const { categories: rawCategories = [], totalPages } = data || {};
 
   // {value: _id, label: title}
   const categories = rawCategories.map((category) => ({
@@ -22,5 +22,11 @@ export function useCategories() {
     value: category.englishTitle,
   }));
 
-  return { isLoading, rawCategories, categories, transformedCategories };
+  return {
+    isLoading,
+    rawCategories,
+    categories,
+    transformedCategories,
+    totalPages,
+  };
 }

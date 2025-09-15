@@ -1,6 +1,5 @@
 "use client";
 
-import { useCategories } from "@/hooks/useCategories";
 import ButtonIcon from "@/ui/ButtonIcon";
 import FileInput from "@/ui/FileInput";
 import RHFSelect from "@/ui/RHFSelect";
@@ -16,6 +15,7 @@ import { useRouter } from "next/navigation";
 import SubmitButton from "@/ui/SubmitButton";
 import useEditPost from "../../[postId]/edit/_hooks/useEditPost";
 import { imageUrlToFile } from "@/utils/fileFormatter";
+import { useGetCategories } from "@/hooks/useCategories";
 
 const schema = yup.object({
   title: yup
@@ -77,7 +77,7 @@ function CreatePostForm({ postToEdit = {} }) {
 
   const router = useRouter();
 
-  const { categories } = useCategories();
+  const { categories } = useGetCategories();
 
   const { isCreating, createPost } = useCreatePost();
   const { isEditing, editPost } = useEditPost();

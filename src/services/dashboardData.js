@@ -1,7 +1,12 @@
 import { cookies } from "next/headers";
-import { getAllUsersApi, getUserApi } from "./authServices";
+import {
+  getAllUsersApi,
+  getUserApi,
+  getUserCommentsApi,
+  getUserPostsApi,
+} from "./authServices";
 import { getAllCommentsApi } from "./commentServices";
-import { getAllPosts } from "./postServices";
+import { getAllPostsApi } from "./postServices";
 import setCookiesOnReq from "@/utils/setCookiesOnReq";
 
 export async function fetchAdminCardsData() {
@@ -10,9 +15,9 @@ export async function fetchAdminCardsData() {
 
   try {
     const data = await Promise.all([
-      getAllUsersApi(options),
-      getAllCommentsApi(options),
-      getAllPosts(),
+      getAllUsersApi("", options),
+      getAllCommentsApi("", options),
+      getAllPostsApi("", options),
     ]);
 
     const numberOfUsers = Number(data[0].users.length ?? "0");
@@ -37,26 +42,17 @@ export async function fetchUserCardsData() {
   try {
     const data = await Promise.all([
       getUserApi(options),
-      getAllCommentsApi(options),
-      getAllPosts(),
+      getUserCommentsApi("", options),
+      getUserPostsApi("", options),
     ]);
-
-    console.log(data[2]);
 
     const numberOfBookmarks = Number(
       data[0].user.bookmarkedPosts.length ?? "0",
     );
 
-    const numberOfComments = Number(
-      data[1].comments.filter(
-        (comment) => comment.user._id === data[0].user._id,
-      ).length ?? "0",
-    );
+    const numberOfComments = Number(data[1].comments.length ?? "0");
 
-    const numberOfPosts = Number(
-      data[2].posts.filter((post) => post.author._id === data[0].user._id)
-        .length ?? "0",
-    );
+    const numberOfPosts = Number(data[2].posts.length ?? "0");
 
     return {
       numberOfBookmarks,
