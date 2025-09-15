@@ -5,6 +5,7 @@ import {
   DocumentTextIcon,
   RectangleGroupIcon,
   Squares2X2Icon,
+  UserGroupIcon,
 } from "@heroicons/react/24/outline";
 import classNames from "classnames";
 import Link from "next/link";
@@ -19,18 +20,24 @@ const sidebarNavs = [
   },
   {
     id: 2,
+    title: "کاربران",
+    icon: <UserGroupIcon />,
+    href: "/profile/users",
+  },
+  {
+    id: 3,
     title: "پست ها",
     icon: <DocumentTextIcon />,
     href: "/profile/posts",
   },
   {
-    id: 3,
+    id: 4,
     title: "نظرات",
     icon: <ChatBubbleBottomCenterIcon />,
     href: "/profile/comments",
   },
   {
-    id: 4,
+    id: 5,
     title: "دسته‌ بندی ها",
     icon: <Squares2X2Icon />,
     href: "/profile/categories",

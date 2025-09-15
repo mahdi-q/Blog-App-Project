@@ -1,6 +1,11 @@
 "use client";
 
-import { getUserApi, signinApi, signupApi } from "@/services/authServices";
+import {
+  getUserApi,
+  logoutApi,
+  signinApi,
+  signupApi,
+} from "@/services/authServices";
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useReducer } from "react";
 import toast from "react-hot-toast";
@@ -48,6 +53,15 @@ const authReducer = (state, action) => {
         ...state,
         user: action.payload,
         isAuthenticated: true,
+        isLoading: false,
+        error: null,
+      };
+
+    case "LOGOUT":
+      return {
+        ...state,
+        user: null,
+        isAuthenticated: false,
         isLoading: false,
         error: null,
       };
@@ -114,6 +128,20 @@ export default function AuthProvider({ children }) {
     }
   }
 
+  async function logout() {
+    dispatch({ type: "LOADING" });
+
+    try {
+      const { message } = await logoutApi();
+      dispatch({ type: "LOGOUT" });
+      router.push("/");
+      toast.success(message || "با موفقیت از سایت خارج شدید.");
+    } catch (error) {
+      dispatch({ type: "REJECTED", payload: error });
+      console.log(error?.response?.data?.message);
+    }
+  }
+
   useEffect(() => {
     async function fetchUser() {
       await getUser();
@@ -124,7 +152,15 @@ export default function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated, isLoading, error, signup, signin }}
+      value={{
+        user,
+        isAuthenticated,
+        isLoading,
+        error,
+        signup,
+        signin,
+        logout,
+      }}
     >
       {children}
     </AuthContext.Provider>

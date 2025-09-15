@@ -8,8 +8,21 @@ import {
 import Link from "next/link";
 import SidebarNavs from "./SidebarNavs";
 import ButtonIcon from "@/ui/ButtonIcon";
+import { useState } from "react";
+import Button from "@/ui/Button";
+import Modal from "@/ui/Modal";
+import { useAuth } from "@/contexts/AuthContext";
 
 function ProfileSidebar({ onClose = () => {} }) {
+  const [open, setOpen] = useState(false);
+
+  const { isLoading, logout } = useAuth();
+
+  const handleLogout = () => {
+    setOpen(false);
+    logout();
+  };
+
   return (
     <div className="flex h-screen flex-col overflow-y-auto pt-6">
       {/* Sidebar Header */}
@@ -35,10 +48,49 @@ function ProfileSidebar({ onClose = () => {} }) {
       <div className="flex-auto">
         <SidebarNavs onClose={onClose} />
 
-        <div className="flex w-full cursor-pointer items-center gap-x-4 rounded-lg py-3 pr-3 text-secondary-700 transition-all duration-300 ease-in-out hover:bg-secondary-100/80 hover:text-red-400">
+        {/* Logout Button */}
+        <div
+          onClick={() => {
+            setOpen(true);
+            onClose();
+          }}
+          className="flex w-full cursor-pointer items-center gap-x-4 rounded-lg py-3 pr-3 text-secondary-700 transition-all duration-300 ease-in-out hover:bg-secondary-100/80 hover:text-red-400"
+        >
           <ArrowLeftStartOnRectangleIcon className="h-5 w-5" />
-          <span>خروج</span>
+          <button>خروج</button>
         </div>
+
+        {/* Logout Modal */}
+        <Modal
+          title={"خروج از حساب کاربری"}
+          open={open}
+          onClose={() => setOpen(false)}
+        >
+          <div>
+            <p className="mt-6 font-medium">
+              آیا از خروج از حساب کاربری خود اطمینان دارید؟
+            </p>
+
+            <div className="mt-6 flex w-full items-center gap-4">
+              <Button
+                variant="danger"
+                onClick={handleLogout}
+                className="w-full"
+                loading={isLoading}
+              >
+                خروج
+              </Button>
+
+              <Button
+                variant="outline"
+                onClick={() => setOpen(false)}
+                className="w-full"
+              >
+                انصراف
+              </Button>
+            </div>
+          </div>
+        </Modal>
       </div>
     </div>
   );

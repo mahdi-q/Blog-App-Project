@@ -8,6 +8,7 @@ const btnType = {
 function Button({
   children,
   onClick,
+  loading = false,
   variant = "primary",
   className,
   ...rest
@@ -15,6 +16,7 @@ function Button({
   return (
     <button
       onClick={onClick}
+      disabled={loading}
       className={`btn ${btnType[variant]} ${className}`}
       {...rest}
     >
