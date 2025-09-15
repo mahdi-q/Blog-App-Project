@@ -7,10 +7,9 @@ import {
   BookmarkIcon,
   ChatBubbleBottomCenterTextIcon,
   DocumentIcon,
-  UserGroupIcon,
 } from "@heroicons/react/24/outline";
 
-async function Profile() {
+async function ProfilePage() {
   const { numberOfBookmarks, numberOfComments, numberOfPosts } =
     await fetchUserCardsData();
 
@@ -50,4 +49,4 @@ async function Profile() {
     </div>
   );
 }
-export default Profile;
+export default ProfilePage;
