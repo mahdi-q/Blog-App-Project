@@ -1,24 +1,23 @@
 import { Suspense } from "react";
-import PostTable from "./posts/_components/PostTable";
+// import PostTable from "./posts/_components/PostTable";
 import Fallback from "@/ui/Fallback";
 import CardsWrapper from "@/components/CardsWrapper";
-import { fetchUserCardsData } from "@/services/dashboardData";
+import { fetchAdminCardsData } from "@/services/dashboardData";
 import {
-  BookmarkIcon,
   ChatBubbleBottomCenterTextIcon,
   DocumentIcon,
   UserGroupIcon,
 } from "@heroicons/react/24/outline";
 
 async function Profile() {
-  const { numberOfBookmarks, numberOfComments, numberOfPosts } =
-    await fetchUserCardsData();
+  const { numberOfUsers, numberOfComments, numberOfPosts } =
+    await fetchAdminCardsData();
 
   const cards = [
     {
-      title: "ذخیره شده‌ ها",
-      value: numberOfBookmarks,
-      icon: <BookmarkIcon className="h-5 w-5" />,
+      title: "کاربران",
+      value: numberOfUsers,
+      icon: <UserGroupIcon className="h-5 w-5" />,
     },
     {
       title: "نظرات",
@@ -26,7 +25,7 @@ async function Profile() {
       icon: <ChatBubbleBottomCenterTextIcon className="h-5 w-5" />,
     },
     {
-      title: "پست‌ها",
+      title: "پست ها",
       value: numberOfPosts,
       icon: <DocumentIcon className="h-5 w-5" />,
     },
@@ -45,7 +44,7 @@ async function Profile() {
       </h2>
 
       <Suspense fallback={<Fallback />}>
-        <PostTable queries="sort=latest&limit=5" />
+        {/* <PostTable queries="sort=latest&limit=5" /> */}
       </Suspense>
     </div>
   );

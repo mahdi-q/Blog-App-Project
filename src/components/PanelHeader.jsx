@@ -7,9 +7,9 @@ import Drawer from "@/ui/Drawer";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useState } from "react";
-import ProfileSidebar from "./ProfileSidebar";
+import PanelSidebar from "./PanelSidebar";
 
-function ProfileHeader() {
+function PanelHeader({ sidebarNavs }) {
   const [isOpenDrawer, setIsOpenDrawer] = useState(false);
   const { user, isLoading } = useAuth();
 
@@ -30,15 +30,18 @@ function ProfileHeader() {
           سلام؛ {user?.name}
         </span>
 
-        <Link href="/profile">
+        <Link href={sidebarNavs[0].href}>
           <Avatar src={user?.avatarUrl} size={28} />
         </Link>
 
         <Drawer open={isOpenDrawer} onClose={() => setIsOpenDrawer(false)}>
-          <ProfileSidebar onClose={() => setIsOpenDrawer(false)} />
+          <PanelSidebar
+            onClose={() => setIsOpenDrawer(false)}
+            sidebarNavs={sidebarNavs}
+          />
         </Drawer>
       </div>
     </header>
   );
 }
-export default ProfileHeader;
+export default PanelHeader;

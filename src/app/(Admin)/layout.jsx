@@ -1,34 +1,31 @@
 import {
-  BookmarkIcon,
   ChatBubbleBottomCenterIcon,
   DocumentTextIcon,
-  HeartIcon,
   RectangleGroupIcon,
   Squares2X2Icon,
   UserGroupIcon,
-  UserIcon,
 } from "@heroicons/react/24/outline";
 import PanelSidebar from "@/components/PanelSidebar";
 import PanelHeader from "@/components/PanelHeader";
 
 export const metadata = {
-  title: "پروفایل",
-  discription: "پنل مدیریت کاربر",
+  title: "پنل ادمین",
+  discription: "پنل مدیریت ادمین",
 };
 
 const sidebarNavs = [
   {
     title: "داشبورد",
     icon: <RectangleGroupIcon />,
-    href: "/profile",
+    href: "/admin",
   },
   {
-    title: "اطلاعات کاربر",
-    icon: <UserIcon />,
-    href: "/profile/me",
+    title: "کاربران",
+    icon: <UserGroupIcon />,
+    href: "/profile/users",
   },
   {
-    title: "پست‌ها",
+    title: "پست ها",
     icon: <DocumentTextIcon />,
     href: "/profile/posts",
   },
@@ -38,14 +35,9 @@ const sidebarNavs = [
     href: "/profile/comments",
   },
   {
-    title: "پست‌های پسندیده‌ شده",
-    icon: <HeartIcon />,
-    href: "/profile/likedPosts",
-  },
-  {
-    title: "پست‌های ذخیره شده",
-    icon: <BookmarkIcon />,
-    href: "/profile/savedPosts",
+    title: "دسته‌ بندی ها",
+    icon: <Squares2X2Icon />,
+    href: "/profile/categories",
   },
 ];
 

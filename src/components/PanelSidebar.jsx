@@ -6,14 +6,17 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import SidebarNavs from "./SidebarNavs";
 import ButtonIcon from "@/ui/ButtonIcon";
 import { useState } from "react";
 import Button from "@/ui/Button";
 import Modal from "@/ui/Modal";
 import { useAuth } from "@/contexts/AuthContext";
+import { usePathname } from "next/navigation";
+import classNames from "classnames";
 
-function ProfileSidebar({ onClose = () => {} }) {
+function PanelSidebar({ onClose = () => {}, sidebarNavs }) {
+  const pathname = usePathname();
+
   const [open, setOpen] = useState(false);
 
   const { isLoading, logout } = useAuth();
@@ -46,7 +49,26 @@ function ProfileSidebar({ onClose = () => {} }) {
 
       {/* Sidebar Content */}
       <div className="flex-auto">
-        <SidebarNavs onClose={onClose} />
+        <ul className="space-y-2">
+          {sidebarNavs.map((nav, index) => (
+            <li key={index}>
+              <Link
+                href={nav.href}
+                onClick={onClose}
+                className={classNames(
+                  "flex w-full items-center gap-x-4 rounded-lg py-3 pr-3 text-secondary-700 transition-all duration-300 ease-in-out hover:bg-secondary-100/80 [&>svg]:h-5 [&>svg]:w-5",
+                  {
+                    "!bg-primary-100/40 !font-bold !text-primary-900":
+                      pathname === nav.href,
+                  },
+                )}
+              >
+                {nav.icon}
+                {nav.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
 
         {/* Logout Button */}
         <div
@@ -95,4 +117,4 @@ function ProfileSidebar({ onClose = () => {} }) {
     </div>
   );
 }
-export default ProfileSidebar;
+export default PanelSidebar;
