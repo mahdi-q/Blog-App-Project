@@ -1,5 +1,5 @@
 import Breadcrumbs from "@/ui/Breadcrumbs";
-import CreatePostForm from "./_components/CreatePostForm";
+import CreatePostForm from "../_components/CreatePostForm";
 
 function CreatePostPage() {
   return (

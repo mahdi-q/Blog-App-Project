@@ -80,8 +80,8 @@
   .form {
     @apply flex max-w-lg flex-col items-center gap-y-8 rounded-xl border border-secondary-200 bg-secondary-0 p-6 shadow-md shadow-secondary-200 [&>form]:flex [&>form]:w-full [&>form]:flex-col [&>form]:gap-y-6;
   }
-  .post__form {
-    @apply grid grid-cols-1 gap-x-10 gap-y-6 rounded-xl border border-secondary-200 bg-secondary-200/40 p-6 lg:grid-cols-2;
+  .form-layout {
+    @apply grid grid-cols-1 gap-x-10 gap-y-8 rounded-xl border border-secondary-200 bg-secondary-200/40 p-6 md:grid-cols-2 xl:grid-cols-3;
   }
   .textField__input {
     @apply w-full rounded-lg border border-secondary-200 bg-secondary-100 px-4 py-3 text-secondary-900 transition-all duration-300 ease-out hover:border-primary-500 focus:border-primary-500 focus:bg-secondary-0 focus:shadow-lg focus:shadow-primary-200 dark:focus:shadow-secondary-200;

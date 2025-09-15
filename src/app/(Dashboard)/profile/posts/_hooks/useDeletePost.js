@@ -12,7 +12,7 @@ export default function useDeletePost() {
       toast.success(data?.message || "پست با موفقیت حذف شد");
 
       queryClient.invalidateQueries({
-        queryKey: ["posts"],
+        queryKey: ["user-posts"],
       });
     },
 

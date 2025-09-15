@@ -10,12 +10,14 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
-import useCreatePost from "../_hooks/useCreatePost";
 import { useRouter } from "next/navigation";
 import SubmitButton from "@/ui/SubmitButton";
-import useEditPost from "../../[postId]/edit/_hooks/useEditPost";
 import { imageUrlToFile } from "@/utils/fileFormatter";
 import { useGetCategories } from "@/hooks/useCategories";
+import useCreatePost from "../_hooks/useCreatePost";
+import useEditPost from "../_hooks/useEditPost";
+import RHFTextarea from "@/ui/RHFTextarea";
+import toast from "react-hot-toast";
 
 const schema = yup.object({
   title: yup
@@ -101,7 +103,7 @@ function CreatePostForm({ postToEdit = {} }) {
     handleSubmit,
     reset,
     setValue,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm({
     resolver: yupResolver(schema),
     mode: "onTouched",
@@ -120,6 +122,8 @@ function CreatePostForm({ postToEdit = {} }) {
   }, [editId]);
 
   const onSubmit = (data) => {
+    if (!isDirty) return toast.error("لطفا یکی از فیلد ها را تغییر دهید");
+
     const formData = new FormData();
 
     for (const key in data) {
@@ -149,7 +153,7 @@ function CreatePostForm({ postToEdit = {} }) {
   };
 
   return (
-    <form className="post__form" onSubmit={handleSubmit(onSubmit)}>
+    <form className="form-layout" onSubmit={handleSubmit(onSubmit)}>
       {/* Title Input */}
       <RHFTextField
         name="title"
@@ -159,22 +163,14 @@ function CreatePostForm({ postToEdit = {} }) {
         isRequired
       />
 
-      {/* Brief Text Input */}
-      <RHFTextField
-        name="briefText"
-        label="خلاصه متن"
+      {/* Category Select Input */}
+      <RHFSelect
+        name="category"
+        label="دسته بندی"
         register={register}
         errors={errors}
         isRequired
-      />
-
-      {/* Text Input */}
-      <RHFTextField
-        name="text"
-        label="متن"
-        register={register}
-        errors={errors}
-        isRequired
+        options={categories}
       />
 
       {/* Slug Input */}
@@ -196,64 +192,74 @@ function CreatePostForm({ postToEdit = {} }) {
         isRequired
       />
 
-      {/* Category Select Input */}
-      <RHFSelect
-        name="category"
-        label="دسته بندی"
+      {/* Brief Text Input */}
+      <RHFTextarea
+        name="briefText"
+        label="خلاصه متن"
         register={register}
         errors={errors}
         isRequired
-        options={categories}
       />
 
-      {/* Cover Post Input */}
-      <Controller
-        name="coverImage"
-        control={control}
-        rules={{ required: "کاور پست الزامی است" }}
-        render={({ field: { value, onChange, ...rest } }) => (
-          <FileInput
-            label="انتخاب کاور پست"
-            name="coverPost"
-            value={value?.fileName}
-            errors={errors}
-            onChange={(event) => {
-              const file = event.target.files[0];
-              onChange(file);
-              setCoverImageUrl(URL.createObjectURL(file));
-              event.target.value = null;
-            }}
-            {...rest}
-          />
+      {/* Text Input */}
+      <RHFTextarea
+        name="text"
+        label="متن"
+        register={register}
+        errors={errors}
+        isRequired
+      />
+
+      <div className="space-y-2">
+        {/* Cover Post Input */}
+        <Controller
+          name="coverImage"
+          control={control}
+          rules={{ required: "کاور پست الزامی است" }}
+          render={({ field: { value, onChange, ...rest } }) => (
+            <FileInput
+              label="انتخاب کاور پست"
+              name="coverPost"
+              value={value?.fileName}
+              errors={errors}
+              onChange={(event) => {
+                const file = event.target.files[0];
+                onChange(file);
+                setCoverImageUrl(URL.createObjectURL(file));
+                event.target.value = null;
+              }}
+              {...rest}
+            />
+          )}
+        />
+
+        {/* Showing Cover Post */}
+        {coverImageUrl && (
+          <div className="relative aspect-video overflow-hidden rounded-lg">
+            <Image
+              fill
+              alt="cover-image"
+              src={coverImageUrl}
+              className="object-cover object-center"
+            />
+
+            <ButtonIcon
+              varient="red"
+              className="absolute bottom-2 left-2"
+              onClick={() => {
+                setCoverImageUrl(null);
+                setValue("coverImage", null);
+              }}
+            >
+              <TrashIcon />
+            </ButtonIcon>
+          </div>
         )}
-      />
-
-      {/* Showing Cover Post */}
-      {coverImageUrl && (
-        <div className="relative aspect-video overflow-hidden rounded-lg">
-          <Image
-            fill
-            alt="cover-image"
-            src={coverImageUrl}
-            className="object-cover object-center"
-          />
-
-          <ButtonIcon
-            varient="red"
-            className="absolute bottom-2 left-2"
-            onClick={() => {
-              setCoverImageUrl(null);
-              setValue("coverImage", null);
-            }}
-          >
-            <TrashIcon />
-          </ButtonIcon>
-        </div>
-      )}
+      </div>
 
       <SubmitButton
         isLoading={isCreating || isEditing}
-        className="lg:col-start-2 lg:row-start-5 lg:w-1/2 lg:justify-self-end"
+        className="md:col-start-2 md:row-start-6 md:w-1/2 md:justify-self-end xl:col-start-3"
       >
         تایید
       </SubmitButton>

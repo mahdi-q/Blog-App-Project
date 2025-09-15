@@ -1,7 +1,7 @@
 import Breadcrumbs from "@/ui/Breadcrumbs";
 import { getPostByIdApi } from "@/services/postServices";
 import { notFound } from "next/navigation";
-import CreatePostForm from "../../create/_components/CreatePostForm";
+import CreatePostForm from "../../_components/CreatePostForm";
 
 async function EditPostPage({ params: { postId } }) {
   const { post } = await getPostByIdApi(postId);

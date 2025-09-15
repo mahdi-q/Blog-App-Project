@@ -11,7 +11,7 @@ export default function useEditPost() {
     onSuccess: (data) => {
       toast.success(data?.message || "پست با موفقیت ویرایش شد");
       queryClient.invalidateQueries({
-        queryKey: ["posts"],
+        queryKey: ["user-posts"],
       });
     },
 
