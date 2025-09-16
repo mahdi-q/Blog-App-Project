@@ -9,3 +9,7 @@ export async function getAllCommentsApi(queries, options) {
     .get(`/comment/list?${queries}`, options)
     .then(({ data }) => data.data);
 }
+
+export async function deleteCommentApi(commentId) {
+  return http.delete(`/comment/remove/${commentId}`).then(({ data }) => data.data);
+}

@@ -8,6 +8,7 @@ import {
   ChatBubbleBottomCenterTextIcon,
   DocumentIcon,
 } from "@heroicons/react/24/outline";
+import CommentTable from "./comments/_components/CommentTable";
 
 async function ProfilePage() {
   const { numberOfBookmarks, numberOfComments, numberOfPosts } =
@@ -39,13 +40,25 @@ async function ProfilePage() {
         <CardsWrapper cards={cards} />
       </Suspense>
 
-      <h2 className="mb-4 text-lg font-medium text-secondary-800">
-        لیست آخرین پست ها
-      </h2>
+      <div className="mb-12">
+        <h2 className="mb-4 text-lg font-medium text-secondary-800">
+          لیست آخرین پست ها
+        </h2>
 
-      <Suspense fallback={<Fallback />}>
-        <PostTable queries="sort=latest&limit=5" />
-      </Suspense>
+        <Suspense fallback={<Fallback />}>
+          <PostTable queries="limit=4" />
+        </Suspense>
+      </div>
+
+      <div>
+        <h2 className="mb-4 text-lg font-medium text-secondary-800">
+          لیست آخرین نظرات
+        </h2>
+
+        <Suspense fallback={<Fallback />}>
+          <CommentTable queries="limit=4" />
+        </Suspense>
+      </div>
     </div>
   );
 }

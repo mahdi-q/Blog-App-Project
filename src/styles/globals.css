@@ -120,6 +120,10 @@
   .badge--danger {
     @apply bg-red-500 text-white;
   }
+  .badge--warning {
+    @apply bg-orange-500 text-white;
+  }
+  
   .spinner {
     margin: 3.2rem auto 1.6rem;
     width: 60px;
