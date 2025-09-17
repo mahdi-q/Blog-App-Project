@@ -5,9 +5,9 @@ export async function getAllPostsApi(queries, options) {
     .get(`/post/list?${queries}`, options)
     .then(({ data }) => data.data);
 
-  const { posts, totalPages } = data || {};
+  const { posts, totalPages, totalPosts } = data || {};
 
-  return { posts, totalPages };
+  return { posts, totalPages, totalPosts };
 }
 
 export async function getPostBySlugApi(slug, options) {

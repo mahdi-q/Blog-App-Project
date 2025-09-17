@@ -20,9 +20,9 @@ export async function fetchAdminCardsData() {
       getAllPostsApi("", options),
     ]);
 
-    const numberOfUsers = Number(data[0].users.length ?? "0");
-    const numberOfComments = Number(data[1].commentsCount ?? "0");
-    const numberOfPosts = Number(data[2].posts.length ?? "0");
+    const numberOfUsers = Number(data[0].totalUsers ?? "0");
+    const numberOfComments = Number(data[1].totalComments ?? "0");
+    const numberOfPosts = Number(data[2].totalPosts ?? "0");
 
     return {
       numberOfUsers,
@@ -49,10 +49,8 @@ export async function fetchUserCardsData() {
     const numberOfBookmarks = Number(
       data[0].user.bookmarkedPosts.length ?? "0",
     );
-
-    const numberOfComments = Number(data[1].comments.length ?? "0");
-
-    const numberOfPosts = Number(data[2].posts.length ?? "0");
+    const numberOfComments = Number(data[1].totalComments ?? "0");
+    const numberOfPosts = Number(data[2].totalPosts ?? "0");
 
     return {
       numberOfBookmarks,

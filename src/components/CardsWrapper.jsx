@@ -16,10 +16,6 @@ async function CardsWrapper({ cards }) {
           </p>
         </div>
       ))}
-
-      {/* <Card title="کاربران" value={numberOfUsers} type="users" />
-      <Card title="نظرات" value={numberOfComments} type="comments" />
-      <Card title="پست ها" value={numberOfPosts} type="posts" /> */}
     </div>
   );
 }

@@ -22,22 +22,22 @@ const sidebarNavs = [
   {
     title: "کاربران",
     icon: <UserGroupIcon />,
-    href: "/profile/users",
+    href: "/admin/users",
   },
   {
     title: "پست ها",
     icon: <DocumentTextIcon />,
-    href: "/profile/posts",
+    href: "/admin/posts",
   },
   {
     title: "نظرات",
     icon: <ChatBubbleBottomCenterIcon />,
-    href: "/profile/comments",
+    href: "/admin/comments",
   },
   {
     title: "دسته‌ بندی ها",
     icon: <Squares2X2Icon />,
-    href: "/profile/categories",
+    href: "/admin/categories",
   },
 ];
 

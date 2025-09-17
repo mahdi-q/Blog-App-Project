@@ -33,13 +33,21 @@ function Header() {
             ))}
           </div>
 
-          <li>
-            {isAuthenticated ? (
-              <NavLink path="/profile">پروفایل</NavLink>
-            ) : (
-              <NavLink path="/signin">ورود</NavLink>
-            )}
-          </li>
+          <div className="flex items-center gap-x-10">
+            <li>
+              <NavLink path={isAuthenticated ? "/admin" : "/signin"}>
+                پنل ادمین
+              </NavLink>
+            </li>
+
+            <li>
+              {isAuthenticated ? (
+                <NavLink path="/profile">پروفایل</NavLink>
+              ) : (
+                <NavLink path="/signin">ورود</NavLink>
+              )}
+            </li>
+          </div>
         </ul>
       </nav>
     </header>

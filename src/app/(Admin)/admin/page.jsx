@@ -38,14 +38,6 @@ async function Profile() {
       <Suspense fallback={<Fallback />}>
         <CardsWrapper cards={cards} />
       </Suspense>
-
-      <h2 className="mb-4 text-lg font-medium text-secondary-800">
-        لیست آخرین پست ها
-      </h2>
-
-      <Suspense fallback={<Fallback />}>
-        {/* <PostTable queries="sort=latest&limit=5" /> */}
-      </Suspense>
     </div>
   );
 }
