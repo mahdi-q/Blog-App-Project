@@ -1,13 +1,13 @@
 import Image from "next/image";
-import PostAuthor from "../_components/PostAuthor";
-import PostReadingTime from "../_components/PostReadingTime";
-import PostInteraction from "../_components/PostInteraction";
 import { notFound } from "next/navigation";
 import { getAllPostsApi, getPostBySlugApi } from "@/services/postServices";
 import { cookies } from "next/headers";
 import setCookiesOnReq from "@/utils/setCookiesOnReq";
 import RelatedPosts from "../_components/RelatedPosts";
 import PostComments from "../_components/Comments/PostComments";
+import PostAuthor from "@/components/PostAuthor";
+import PostReadingTime from "@/components/PostReadingTime";
+import PostInteraction from "@/components/PostInteraction";
 
 export const dynamicParams = false;
 
