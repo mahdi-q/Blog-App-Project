@@ -10,8 +10,6 @@ import CommentRow from "./CommentRow";
 function CommentTable({ queries, hasPagination = false }) {
   const { isLoading, comments, totalPages } = useGetUserComments(queries);
 
-  console.log(comments);
-
   if (isLoading) return <Fallback />;
 
   if (comments.length === 0) return <Empty resourceName="نظری" />;

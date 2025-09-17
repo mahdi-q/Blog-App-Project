@@ -83,6 +83,9 @@
   .form-layout {
     @apply grid grid-cols-1 gap-x-10 gap-y-8 rounded-xl border border-secondary-200 bg-secondary-200/40 p-6 md:grid-cols-2 xl:grid-cols-3;
   }
+  .textField {
+    @apply w-full;
+  }
   .textField__input {
     @apply w-full rounded-lg border border-secondary-200 bg-secondary-100 px-4 py-3 text-secondary-900 transition-all duration-300 ease-out hover:border-primary-500 focus:border-primary-500 focus:bg-secondary-0 focus:shadow-lg focus:shadow-primary-200 dark:focus:shadow-secondary-200;
   }
@@ -123,7 +126,7 @@
   .badge--warning {
     @apply bg-orange-500 text-white;
   }
-  
+
   .spinner {
     margin: 3.2rem auto 1.6rem;
     width: 60px;

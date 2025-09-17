@@ -35,3 +35,11 @@ export async function getUserCommentsApi(queries, options) {
     .get(`/user/user-comments?${queries}`, options)
     .then(({ data }) => data.data);
 }
+
+export async function updateUserAvatar(data) {
+  return http.post("/user/upload-avatar", data).then(({ data }) => data.data);
+}
+
+export async function updateUserProfile(data) {
+  return http.patch("/user/update", data).then(({ data }) => data.data);
+}
