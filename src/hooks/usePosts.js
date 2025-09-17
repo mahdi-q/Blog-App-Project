@@ -1,5 +1,5 @@
 import { getUserPostsApi } from "@/services/authServices";
-import { getAllPostsApi } from "@/services/postServices";
+import { getAllPostsApi, getPostByIdApi } from "@/services/postServices";
 import { useQuery } from "@tanstack/react-query";
 
 export function useGetPosts(queries) {
@@ -22,4 +22,15 @@ export function useGetUserPosts(queries) {
   const { posts, totalPages } = data || {};
 
   return { isLoading, posts, totalPages };
+}
+
+export function useGetPostById(postId) {
+  const { isLoading, data } = useQuery({
+    queryKey: ["post", postId],
+    queryFn: () => getPostByIdApi(postId),
+  });
+
+  const { post } = data || {};
+
+  return { isLoading, post };
 }
