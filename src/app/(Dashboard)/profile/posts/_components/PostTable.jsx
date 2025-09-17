@@ -21,7 +21,7 @@ function PostTable({ queries, hasPagination = false }) {
           <th>#</th>
           <th>عنوان</th>
           <th>دسته بندی</th>
-          <th>نویسنده</th>
+          <th>زمان مطالعه</th>
           <th>تاریخ ایجاد</th>
           <th>نوع</th>
           <th>عملیات</th>

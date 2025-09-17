@@ -17,7 +17,7 @@ const typeStyles = {
 };
 
 function PostRow({ post, index }) {
-  const { title, category, author, createdAt, type } = post;
+  const { title, category, readingTime, createdAt, type } = post;
 
   return (
     <Table.Row>
@@ -27,7 +27,7 @@ function PostRow({ post, index }) {
 
       <td>{category.title}</td>
 
-      <td>{author.name}</td>
+      <td>{toPersianNumbers(readingTime)} دقیقه</td>
 
       <td>{dateFormatter(createdAt)}</td>
 
