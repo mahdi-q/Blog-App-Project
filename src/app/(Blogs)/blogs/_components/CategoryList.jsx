@@ -1,15 +1,33 @@
-import CategoryItems from "./CategoryItems";
+"use client";
 
-async function CategoryList() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/category/list`);
-  const {
-    data: { categories },
-  } = await res.json();
+import { usePathname } from "next/navigation";
+import CategoryItem from "./CategoryItem";
+import Link from "next/link";
+import classNames from "classnames";
+
+function CategoryList({ categories }) {
+  const pathname = usePathname();
 
   return (
-    <div>
-      <CategoryItems categories={categories} />
-    </div>
+    <ul className="space-y-2">
+      <Link href="/blogs">
+        <li
+          className={classNames(
+            "block w-full rounded-lg py-3 pr-3 text-secondary-700 transition-all duration-300 ease-in-out hover:bg-secondary-100/80",
+            {
+              "!bg-primary-100/40 !font-bold !text-primary-900":
+                pathname === "/blogs",
+            },
+          )}
+        >
+          همه
+        </li>
+      </Link>
+
+      {categories.map((category) => (
+        <CategoryItem key={category._id} category={category} />
+      ))}
+    </ul>
   );
 }
 export default CategoryList;
