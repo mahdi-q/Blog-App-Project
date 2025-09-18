@@ -12,10 +12,11 @@ export default function useDeleteComment() {
       toast.success(data?.message || "نظر با موفقیت حذف شد");
 
       queryClient.invalidateQueries({
-        queryKey: ["user-comments"],
-      });
-      queryClient.invalidateQueries({
         queryKey: ["comments"],
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: ["user-comments"],
       });
     },
 
