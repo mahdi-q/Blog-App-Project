@@ -49,7 +49,7 @@ function PanelSidebar({ onClose = () => {}, sidebarNavs }) {
 
       {/* Sidebar Content */}
       <div className="flex-auto">
-        <ul className="space-y-2">
+        <ul className="space-y-2 mb-2">
           {sidebarNavs.map((nav, index) => (
             <li key={index}>
               <Link

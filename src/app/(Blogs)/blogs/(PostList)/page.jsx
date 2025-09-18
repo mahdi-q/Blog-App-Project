@@ -4,13 +4,16 @@ import setCookiesOnReq from "@/utils/setCookiesOnReq";
 import { getAllPostsApi } from "@/services/postServices";
 import queryString from "query-string";
 import { toPersianNumbers } from "@/utils/toPersianNumbers";
+import Pagination from "@/ui/Pagination";
+
+export const revalidate = 600;
 
 async function BlogListPage({ searchParams }) {
   const queries = queryString.stringify(searchParams);
 
   const cookiesStore = cookies();
   const options = setCookiesOnReq(cookiesStore);
-  const {posts} = await getAllPostsApi(queries, options);
+  const { posts, totalPages } = await getAllPostsApi(queries, options);
 
   const { search } = searchParams;
 
@@ -21,7 +24,7 @@ async function BlogListPage({ searchParams }) {
   return (
     <div>
       {posts.length === 0 ? (
-        <p className="text-lg font-bold text-secondary-600">
+        <p className="mt-8 text-center text-lg font-bold text-secondary-600">
           {search
             ? `هیچ نتیجه ای برای "${search}" یافت نشد.`
             : "پستی برای نشان دادن وجود ندارد."}
@@ -35,6 +38,12 @@ async function BlogListPage({ searchParams }) {
           )}
 
           <PostList posts={posts} />
+
+          {posts && posts.length > 0 && (
+            <div className="mt-8 flex items-center justify-center">
+              <Pagination totalPages={totalPages} />
+            </div>
+          )}
         </div>
       )}
     </div>

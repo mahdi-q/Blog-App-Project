@@ -1,9 +1,12 @@
 import { getAllPostsApi } from "@/services/postServices";
+import Pagination from "@/ui/Pagination";
 import setCookiesOnReq from "@/utils/setCookiesOnReq";
 import { toPersianNumbers } from "@/utils/toPersianNumbers";
 import PostList from "app/(Blogs)/blogs/_components/PostList";
 import { cookies } from "next/headers";
 import queryString from "query-string";
+
+export const revalidate = 600;
 
 async function CategoryPage({ params, searchParams }) {
   const categoryQuery = `categorySlug=${params.categorySlug}`;
@@ -11,7 +14,7 @@ async function CategoryPage({ params, searchParams }) {
 
   const cookiesStore = cookies();
   const options = setCookiesOnReq(cookiesStore);
-  const { posts } = await getAllPostsApi(queries, options);
+  const { posts, totalPages } = await getAllPostsApi(queries, options);
 
   const { search } = searchParams;
 
@@ -22,7 +25,7 @@ async function CategoryPage({ params, searchParams }) {
   return (
     <div>
       {posts.length === 0 ? (
-        <p className="text-lg font-bold text-secondary-600">
+        <p className="mt-8 text-center text-lg font-bold text-secondary-600">
           {search
             ? `هیچ نتیجه ای برای "${search}" یافت نشد.`
             : "پستی در این دسته بندی یافت نشد."}
@@ -36,6 +39,12 @@ async function CategoryPage({ params, searchParams }) {
           )}
 
           <PostList posts={posts} />
+
+          {posts && posts.length > 0 && (
+            <div className="mt-8 flex items-center justify-center">
+              <Pagination totalPages={totalPages} />
+            </div>
+          )}
         </div>
       )}
     </div>

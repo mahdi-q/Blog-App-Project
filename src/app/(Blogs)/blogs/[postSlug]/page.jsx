@@ -9,8 +9,6 @@ import PostAuthor from "@/components/PostAuthor";
 import PostReadingTime from "@/components/PostReadingTime";
 import PostInteraction from "@/components/PostInteraction";
 
-export const dynamicParams = false;
-
 export async function generateStaticParams() {
   const { posts } = await getAllPostsApi();
 
