@@ -11,12 +11,12 @@ function CategoriesListPage({ searchParams }) {
 
   return (
     <div>
-      <div className="mb-12 grid grid-cols-2 items-center gap-x-8 gap-y-4 lg:grid-cols-4">
+      <div className="mb-12 grid grid-cols-2 items-center gap-x-8 gap-y-4 xl:grid-cols-4">
         <h1 className="text-xl font-bold text-secondary-800">
           لیست دسته‌بندی ها
         </h1>
 
-        <div className="col-span-2 col-start-1 flex items-center gap-4 lg:col-span-2 lg:col-start-2">
+        <div className="col-span-2 col-start-1 flex items-center gap-4 xl:col-span-2 xl:col-start-2">
           <div className="flex-1">
             <SearchBox />
           </div>
@@ -24,7 +24,7 @@ function CategoriesListPage({ searchParams }) {
           <SortButton />
         </div>
 
-        <div className="col-start-2 row-start-1 justify-self-end lg:col-start-4">
+        <div className="col-start-2 row-start-1 justify-self-end xl:col-start-4">
           <CreateCategory />
         </div>
       </div>

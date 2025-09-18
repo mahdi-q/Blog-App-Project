@@ -7,11 +7,11 @@ function NotFound() {
       <div className="container xl:max-w-screen-xl">
         <div className="flex flex-col items-center justify-center pt-10">
           <h1 className="mb-8 text-xl font-bold text-secondary-800">
-            پستی با این مشخصات یافت نشد.
+            دسته‌بندی ای با این مشخصات یافت نشد.
           </h1>
 
           <Button variant="outline">
-            <Link href="/profile/posts">بازگشت به صفحه پست ها</Link>
+            <Link href="/admin/categories">بازگشت به صفحه دسته‌بندی ها</Link>
           </Button>
         </div>
       </div>

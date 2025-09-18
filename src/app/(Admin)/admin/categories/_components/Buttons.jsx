@@ -30,7 +30,7 @@ export function CreateCategory() {
 
 export function UpdateCategory({ id }) {
   return (
-    <Link href={`/admin/category/${id}/edit`}>
+    <Link href={`/admin/categories/${id}/edit`}>
       <ButtonIcon
         className="border-none !text-success hover:!text-success lg:!text-inherit"
         varient="outline"
