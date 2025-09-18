@@ -11,5 +11,13 @@ export async function getAllCommentsApi(queries, options) {
 }
 
 export async function deleteCommentApi(commentId) {
-  return http.delete(`/comment/remove/${commentId}`).then(({ data }) => data.data);
+  return http
+    .delete(`/comment/remove/${commentId}`)
+    .then(({ data }) => data.data);
+}
+
+export async function changeStatusCommentApi({ commentId, data }) {
+  return http
+    .patch(`/comment/update/${commentId}`, data)
+    .then(({ data }) => data.data);
 }

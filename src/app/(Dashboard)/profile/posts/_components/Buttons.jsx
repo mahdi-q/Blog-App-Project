@@ -14,6 +14,7 @@ import { useState } from "react";
 import useDeletePost from "../_hooks/useDeletePost";
 import { useRouter } from "next/navigation";
 
+// Just used in user panel
 export function CreatePost() {
   return (
     <Link className="inline-block" href="/profile/posts/create">
@@ -29,6 +30,7 @@ export function CreatePost() {
   );
 }
 
+// Just used in user panel
 export function UpdatePost({ id }) {
   return (
     <Link href={`/profile/posts/${id}/edit`}>
@@ -42,6 +44,7 @@ export function UpdatePost({ id }) {
   );
 }
 
+// Used in user and admin panel
 export function DeletePost({ post: { _id, title } }) {
   const [open, setOpen] = useState(false);
 

@@ -14,6 +14,9 @@ export default function useDeleteComment() {
       queryClient.invalidateQueries({
         queryKey: ["user-comments"],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["comments"],
+      });
     },
 
     onError: (err) => {
