@@ -8,6 +8,7 @@ import PostComments from "../_components/Comments/PostComments";
 import PostAuthor from "@/components/PostAuthor";
 import PostReadingTime from "@/components/PostReadingTime";
 import PostInteraction from "@/components/PostInteraction";
+import BackButton from "@/ui/BackButton";
 
 export async function generateStaticParams() {
   const { posts } = await getAllPostsApi();
@@ -26,13 +27,28 @@ export async function generateMetadata({ params }) {
 async function SinglePost({ params }) {
   const cookiesStore = cookies();
   const options = setCookiesOnReq(cookiesStore);
-  const post = await getPostBySlugApi(params.postSlug, options);
 
-  if (!post) notFound();
+  let post;
+
+  try {
+    const postData = await getPostBySlugApi(params.postSlug, options);
+
+    post = postData;
+
+    if (!post) notFound();
+  } catch (error) {
+    console.log(error?.response?.data?.message);
+
+    notFound();
+  }
 
   return (
     <div className="mx-auto mb-10 max-w-screen-md space-y-6">
-      <h1 className="text-2xl font-bold text-secondary-700">{post.title}</h1>
+      <div className="flex flex-col gap-4">
+        <BackButton />
+
+        <h1 className="text-2xl font-bold text-secondary-700">{post.title}</h1>
+      </div>
 
       {/* Post Navbar */}
       <div className="flex w-full items-center justify-between border-b border-secondary-300 pb-1">
