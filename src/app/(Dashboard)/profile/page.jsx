@@ -34,7 +34,9 @@ async function ProfilePage() {
 
   return (
     <div>
-      <h1 className="mb-4 text-xl font-bold text-secondary-800">داشبورد</h1>
+      <h1 className="mb-6 text-xl font-bold text-secondary-800">
+        داشبورد پنل کاربر
+      </h1>
 
       <Suspense fallback={<Fallback />}>
         <CardsWrapper cards={cards} />
