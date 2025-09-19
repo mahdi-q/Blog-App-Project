@@ -5,8 +5,8 @@ import { Toaster } from "react-hot-toast";
 
 export const metadata = {
   title: {
-    template: "%s | بلاگ اپ",
-    default: "بلاگ اپ",
+    template: "%s | بلاگ نست",
+    default: "بلاگ نست",
   },
   description: "وب اپلیکیشن مدیریت بلاگ ها و نظرات کاربران",
 };
