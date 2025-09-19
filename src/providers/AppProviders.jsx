@@ -1,6 +1,7 @@
 "use client";
 
 import AuthProvider from "@/contexts/AuthContext";
+import { DarkModeProvider } from "@/contexts/DarkModeContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
@@ -11,7 +12,9 @@ function AppProviders({ children }) {
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
 
-      <AuthProvider>{children}</AuthProvider>
+      <DarkModeProvider>
+        <AuthProvider>{children}</AuthProvider>
+      </DarkModeProvider>
     </QueryClientProvider>
   );
 }

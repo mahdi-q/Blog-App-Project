@@ -117,7 +117,7 @@ export function ChangeStatusComment({
               <option value="2">تایید شده</option>
             </select>
 
-            <ChevronDownIcon className="absolute left-4 top-4 h-5 w-5" />
+            <ChevronDownIcon className="absolute left-4 top-4 h-5 w-5 text-secondary-900" />
           </div>
         </div>
       </Modal>

@@ -38,7 +38,7 @@
       --color-red-300: 252, 165, 165;
     }
     &.dark-mode {
-      --background-app-rgb: 20, 20, 20;
+      --background-app-rgb: 20, 30, 40;
 
       --color-secondary-900: 249, 250, 251;
       --color-secondary-800: 243, 244, 246;
@@ -90,7 +90,7 @@
     @apply w-full rounded-lg border border-secondary-200 bg-secondary-100 px-4 py-3 text-secondary-900 transition-all duration-300 ease-out hover:border-primary-500 focus:border-primary-500 focus:bg-secondary-0 focus:shadow-lg focus:shadow-primary-200 dark:focus:shadow-secondary-200;
   }
   .textField--invalid {
-    @apply border-error bg-red-50 hover:border-error focus:border-error;
+    @apply border-error bg-red-50 hover:border-error focus:border-error dark:bg-red-300;
   }
   .btn {
     @apply rounded-lg border px-4 py-3 transition-all duration-300;

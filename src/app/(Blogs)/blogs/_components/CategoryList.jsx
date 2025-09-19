@@ -15,7 +15,7 @@ function CategoryList({ categories }) {
           className={classNames(
             "block w-full rounded-lg py-3 pr-3 text-secondary-700 transition-all duration-300 ease-in-out hover:bg-secondary-100/80",
             {
-              "!bg-primary-100/40 !font-bold !text-primary-900":
+              "!bg-primary-100/50 !font-bold !text-primary-900 dark:!bg-primary-100":
                 pathname === "/blogs",
             },
           )}

@@ -16,6 +16,8 @@ function withOpacity(variableName) {
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
 
+  darkMode: ["selector", '[class="dark-mode"]'],
+
   theme: {
     extend: {
       colors: {

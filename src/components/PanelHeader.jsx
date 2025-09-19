@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useState } from "react";
 import PanelSidebar from "./PanelSidebar";
 import { useGetUser } from "@/hooks/useUsers";
+import ToggleThemeButton from "./ToggleThemeButton";
 
 function PanelHeader({ sidebarNavs }) {
   const [isOpenDrawer, setIsOpenDrawer] = useState(false);
@@ -30,9 +31,13 @@ function PanelHeader({ sidebarNavs }) {
           سلام؛ {user?.name}
         </span>
 
-        <Link href={sidebarNavs[0].href}>
-          <Avatar src={user?.avatarUrl} size={28} />
-        </Link>
+        <div className="flex items-center gap-4">
+          <ToggleThemeButton />
+
+          <Link href={sidebarNavs[0].href}>
+            <Avatar src={user?.avatarUrl} size={28} />
+          </Link>
+        </div>
 
         <Drawer open={isOpenDrawer} onClose={() => setIsOpenDrawer(false)}>
           <PanelSidebar

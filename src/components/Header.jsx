@@ -7,11 +7,11 @@ import {
   Cog6ToothIcon,
   CubeIcon,
   HomeIcon,
-  SunIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import ButtonIcon from "@/ui/ButtonIcon";
+import ToggleThemeButton from "./ToggleThemeButton";
 
 const navLinks = [
   {
@@ -52,9 +52,7 @@ function Header() {
 
           <div className="flex items-center gap-x-2">
             <li>
-              <ButtonIcon varient="primary">
-                <SunIcon className="h-5 w-5" />
-              </ButtonIcon>
+              <ToggleThemeButton />
             </li>
 
             <li>

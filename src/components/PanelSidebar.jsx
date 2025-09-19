@@ -58,7 +58,7 @@ function PanelSidebar({ onClose = () => {}, sidebarNavs }) {
                 className={classNames(
                   "flex w-full items-center gap-x-4 rounded-lg py-3 pr-3 text-secondary-700 transition-all duration-300 ease-in-out hover:bg-secondary-100/80 [&>svg]:h-5 [&>svg]:w-5",
                   {
-                    "!bg-primary-100/40 !font-bold !text-primary-900":
+                    "!bg-primary-100 !font-bold !text-primary-900":
                       pathname === nav.href,
                   },
                 )}
@@ -89,7 +89,7 @@ function PanelSidebar({ onClose = () => {}, sidebarNavs }) {
           onClose={() => setOpen(false)}
         >
           <div>
-            <p className="mt-6 font-medium">
+            <p className="mt-6 font-medium text-secondary-900">
               آیا از خروج از حساب کاربری خود اطمینان دارید؟
             </p>
 

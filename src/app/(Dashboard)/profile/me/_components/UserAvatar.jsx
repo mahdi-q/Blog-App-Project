@@ -23,7 +23,7 @@ function UserAvatar({ avatarUrl }) {
 
       <label
         htmlFor="avatar"
-        className={`absolute bottom-3 right-14 inline-block cursor-pointer rounded-full border border-secondary-700 bg-secondary-300 p-3 transition-all duration-200 hover:border-primary-900 hover:text-primary-900 ${
+        className={`absolute bottom-3 right-14 inline-block cursor-pointer rounded-full border border-secondary-700 bg-secondary-300 p-3 text-secondary-700 transition-all duration-200 hover:border-primary-900 hover:text-primary-900 ${
           isUpdating ? "cursor-not-allowed opacity-50" : ""
         }`}
       >
