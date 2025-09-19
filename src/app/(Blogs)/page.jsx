@@ -1,5 +1,6 @@
-import Button from "@/ui/Button";
-import Link from "next/link";
+import HeadingSection from "./_components/HeadingSection";
+import CategoryListSection from "./_components/CategoryListSection";
+import BlogsListSection from "./_components/BlogsListSection";
 
 export const metadata = {
   title: "خانه - اپلیکیشن مدیریت بلاگ ها",
@@ -8,25 +9,25 @@ export const metadata = {
 export default function Home() {
   return (
     <div>
-      <h1 className="my-20 text-center text-2xl font-bold text-secondary-800 md:text-4xl lg:text-5xl">
-        اپلیکیشن مدیریت بلاگ ها
-      </h1>
+      {/* Heading Section */}
+      <HeadingSection />
 
-      <p className="mb-10 text-center leading-loose text-secondary-500 md:text-lg">
-        جایی که قراره بتونی یه اپلیکیشن بلاگ کامل رو مدیریت کنی!
-        <br />
-        بتونی بلاگ بسازی - کامنت بزاری و در پنلت همه اتفاقات رو رصد کنی!
-      </p>
+      {/* Categories Section */}
+      <CategoryListSection />
 
-      <div className="flex w-full flex-row items-center justify-center gap-x-8">
-        <Button variant="outline">
-          <Link href="/blogs">مطالعه بلاگ ها</Link>
-        </Button>
+      {/* Popular Blogs Section */}
+      <BlogsListSection
+        link="/blogs?order=popular"
+        queryParams="limit=4&order=popular"
+        text="بلاگ‌های پرطرفدار"
+      />
 
-        <Button>
-          <Link href="/profile">مدیریت بلاگ ها</Link>
-        </Button>
-      </div>
+      {/* Latest Blogs Section */}
+      <BlogsListSection
+        link="/blogs?order=desc"
+        queryParams="limit=4&order=desc"
+        text="جدیدترین بلاگ‌ها"
+      />
     </div>
   );
 }

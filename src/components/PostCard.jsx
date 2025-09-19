@@ -15,7 +15,7 @@ function PostCard({ post, hasInteractions = true }) {
       {/* Post Content */}
       <div className="space-y-4 p-2">
         <Link href={`/blogs/${post.slug}`}>
-          <h2 className="font-bold text-secondary-700 hover:text-primary-900">
+          <h2 className="font-bold text-secondary-700 transition-colors duration-200 hover:text-primary-900">
             {post.title}
           </h2>
         </Link>

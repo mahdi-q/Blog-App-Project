@@ -12,17 +12,21 @@ import {
   BookmarkIcon as BookmarkIconSolid,
   HeartIcon as HeartIconSolid,
 } from "@heroicons/react/24/solid";
+import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 function PostInteraction({ post }) {
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const likeHandler = async (postId) => {
     try {
       const { message } = await likePostApi(postId);
       toast.success(message);
       router.refresh();
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
+      queryClient.invalidateQueries({ queryKey: ["post", postId] });
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
@@ -33,6 +37,8 @@ function PostInteraction({ post }) {
       const { message } = await bookmarkPostApi(postId);
       toast.success(message);
       router.refresh();
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
+      queryClient.invalidateQueries({ queryKey: ["post", postId] });
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
