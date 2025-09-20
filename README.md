@@ -13,6 +13,8 @@ A blogging platform where users can write posts in various categories, comment o
 ## Features
 
 - **Developed with Next.js for server-side rendering and SEO optimization**
+- **Responsive design with Tailwind CSS**
+- **Dark and Light Theme System**
 - **User authentication and authorization**
 - **Blog post creation and editing**
 - **Comment system for user interaction**
