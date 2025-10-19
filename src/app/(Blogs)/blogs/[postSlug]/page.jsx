@@ -43,7 +43,7 @@ async function SinglePost({ params }) {
   }
 
   return (
-    <div className="mx-auto mb-10 max-w-screen-md space-y-6">
+    <div className="mx-auto mb-10 min-h-[60vh] max-w-screen-md space-y-6">
       <div className="flex flex-col gap-4">
         <BackButton />
 
@@ -72,8 +72,10 @@ async function SinglePost({ params }) {
       </div>
 
       {/* Post Text */}
-      <div className="space-y-6 text-secondary-600">
+      <div className="w-full space-y-6 whitespace-pre-line leading-loose text-secondary-600">
         <p>{post.briefText}</p>
+
+        <span className="block w-full border border-dashed border-secondary-400"></span>
 
         <p>{post.text}</p>
       </div>

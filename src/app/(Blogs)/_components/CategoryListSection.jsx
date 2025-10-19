@@ -7,12 +7,12 @@ import Link from "next/link";
 const categoriesList = [
   {
     title: "تکنولوژی",
-    slug: "technolagy",
+    slug: "technology",
     img: "/images/technolagy.png",
   },
   {
     title: "اقتصادی",
-    slug: "economic",
+    slug: "ecconomic",
     img: "/images/economic.png",
   },
   {

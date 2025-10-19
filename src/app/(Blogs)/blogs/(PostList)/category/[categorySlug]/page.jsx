@@ -23,7 +23,7 @@ async function CategoryPage({ params, searchParams }) {
     : "";
 
   return (
-    <div>
+    <div className="min-h-[60vh]">
       {posts.length === 0 ? (
         <p className="mt-8 text-center text-lg font-bold text-secondary-600">
           {search
