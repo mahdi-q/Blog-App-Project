@@ -4,9 +4,18 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import ButtonIcon from "./ButtonIcon";
 import { createPortal } from "react-dom";
 import useOutsideClick from "@/hooks/useOutsideClick";
+import { useEffect, useState } from "react";
 
 function Modal({ title, description = "", open, onClose, children }) {
   const ref = useOutsideClick(onClose);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    //  Now we are sure that the component is mounted
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   return (
     open &&
