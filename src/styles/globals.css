@@ -78,7 +78,7 @@
 
 @layer components {
   .form {
-    @apply flex max-w-lg flex-col items-center gap-y-8 rounded-xl border border-secondary-200 bg-secondary-0 p-6 shadow-md shadow-secondary-200 [&>form]:flex [&>form]:w-full [&>form]:flex-col [&>form]:gap-y-6;
+    @apply flex w-full flex-col items-center justify-center gap-y-8 rounded-xl border border-secondary-200 bg-secondary-0 p-6 shadow-md shadow-secondary-200 [&>form]:flex [&>form]:w-full [&>form]:flex-col [&>form]:gap-y-6;
   }
   .form-layout {
     @apply grid grid-cols-1 gap-x-10 gap-y-8 rounded-xl border border-secondary-200 bg-secondary-200/40 p-6 md:grid-cols-2 xl:grid-cols-3;
