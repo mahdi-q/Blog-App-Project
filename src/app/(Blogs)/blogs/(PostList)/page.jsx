@@ -6,7 +6,7 @@ import queryString from "query-string";
 import { toPersianNumbers } from "@/utils/toPersianNumbers";
 import Pagination from "@/ui/Pagination";
 
-export const revalidate = 600;
+export const revalidate = 60;
 
 async function BlogListPage({ searchParams }) {
   const queries = queryString.stringify(searchParams);

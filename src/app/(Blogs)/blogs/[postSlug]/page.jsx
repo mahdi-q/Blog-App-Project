@@ -12,13 +12,13 @@ import BackButton from "@/ui/BackButton";
 
 export async function generateStaticParams() {
   const { posts } = await getAllPostsApi();
-
-  return posts.map((post) => ({ postSlug: post.slug }));
+  return posts.slice(0, 6).map((post) => ({ postSlug: post.slug }));
 }
+
+export const revalidate = 60;
 
 export async function generateMetadata({ params }) {
   const post = await getPostBySlugApi(params.postSlug);
-
   return {
     title: `پست ${post.title}`,
   };
@@ -32,13 +32,11 @@ async function SinglePost({ params }) {
 
   try {
     const postData = await getPostBySlugApi(params.postSlug, options);
-
     post = postData;
 
     if (!post) notFound();
   } catch (error) {
     console.log(error?.response?.data?.message);
-
     notFound();
   }
 
@@ -46,17 +44,14 @@ async function SinglePost({ params }) {
     <div className="mx-auto mb-10 min-h-[60vh] max-w-screen-md space-y-6">
       <div className="flex flex-col gap-4">
         <BackButton />
-
         <h1 className="text-2xl font-bold text-secondary-700">{post.title}</h1>
       </div>
 
       {/* Post Navbar */}
       <div className="flex w-full items-center justify-between border-b border-secondary-300 pb-1">
         <PostAuthor {...post.author} />
-
         <div className="flex items-center gap-x-6">
           <PostReadingTime time={post.readingTime} />
-
           <PostInteraction post={post} />
         </div>
       </div>
@@ -74,9 +69,7 @@ async function SinglePost({ params }) {
       {/* Post Text */}
       <div className="w-full space-y-6 whitespace-pre-line leading-loose text-secondary-600">
         <p>{post.briefText}</p>
-
         <span className="block w-full border border-dashed border-secondary-400"></span>
-
         <p>{post.text}</p>
       </div>
 
@@ -88,4 +81,5 @@ async function SinglePost({ params }) {
     </div>
   );
 }
+
 export default SinglePost;

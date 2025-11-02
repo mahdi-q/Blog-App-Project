@@ -6,7 +6,7 @@ import PostList from "app/(Blogs)/blogs/_components/PostList";
 import { cookies } from "next/headers";
 import queryString from "query-string";
 
-export const revalidate = 600;
+export const revalidate = 60;
 
 async function CategoryPage({ params, searchParams }) {
   const categoryQuery = `categorySlug=${params.categorySlug}`;
