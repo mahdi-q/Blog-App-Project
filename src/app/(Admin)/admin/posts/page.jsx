@@ -5,7 +5,8 @@ import queryString from "query-string";
 import { Suspense } from "react";
 import PostTable from "./_components/PostTable";
 
-function PostsListPage({ searchParams }) {
+async function PostsListPage(props) {
+  const searchParams = await props.searchParams;
   const queries = queryString.stringify(searchParams);
 
   return (

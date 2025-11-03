@@ -17,15 +17,17 @@ export async function generateStaticParams() {
 
 export const revalidate = 60;
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params;
   const post = await getPostBySlugApi(params.postSlug);
   return {
     title: `پست ${post.title}`,
   };
 }
 
-async function SinglePost({ params }) {
-  const cookiesStore = cookies();
+async function SinglePost(props) {
+  const params = await props.params;
+  const cookiesStore = await cookies();
   const options = setCookiesOnReq(cookiesStore);
 
   let post;

@@ -5,7 +5,8 @@ import queryString from "query-string";
 import { Suspense } from "react";
 import UserTable from "./_components/UserTable";
 
-function UsersListPage({ searchParams }) {
+async function UsersListPage(props) {
+  const searchParams = await props.searchParams;
   const queries = queryString.stringify(searchParams);
 
   return (

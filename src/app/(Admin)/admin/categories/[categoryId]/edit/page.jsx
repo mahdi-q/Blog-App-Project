@@ -5,8 +5,14 @@ import CreateCategoryForm from "../../_components/CreateCategoryForm";
 import { cookies } from "next/headers";
 import setCookiesOnReq from "@/utils/setCookiesOnReq";
 
-async function EditCategoryPage({ params: { categoryId } }) {
-  const cookiesStore = cookies();
+async function EditCategoryPage(props) {
+  const params = await props.params;
+
+  const {
+    categoryId
+  } = params;
+
+  const cookiesStore = await cookies();
   const options = setCookiesOnReq(cookiesStore);
   const { categories } = await getAllCategoriesApi("", options);
 

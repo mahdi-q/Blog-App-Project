@@ -8,11 +8,13 @@ import queryString from "query-string";
 
 export const revalidate = 60;
 
-async function CategoryPage({ params, searchParams }) {
+async function CategoryPage(props) {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
   const categoryQuery = `categorySlug=${params.categorySlug}`;
   const queries = `${queryString.stringify(searchParams)}&${categoryQuery}`;
 
-  const cookiesStore = cookies();
+  const cookiesStore = await cookies();
   const options = setCookiesOnReq(cookiesStore);
   const { posts, totalPages } = await getAllPostsApi(queries, options);
 

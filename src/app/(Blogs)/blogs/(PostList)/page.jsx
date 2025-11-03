@@ -8,10 +8,11 @@ import Pagination from "@/ui/Pagination";
 
 export const revalidate = 60;
 
-async function BlogListPage({ searchParams }) {
+async function BlogListPage(props) {
+  const searchParams = await props.searchParams;
   const queries = queryString.stringify(searchParams);
 
-  const cookiesStore = cookies();
+  const cookiesStore = await cookies();
   const options = setCookiesOnReq(cookiesStore);
   const { posts, totalPages } = await getAllPostsApi(queries, options);
 

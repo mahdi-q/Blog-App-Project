@@ -10,7 +10,7 @@ import { getAllPostsApi } from "./postServices";
 import setCookiesOnReq from "@/utils/setCookiesOnReq";
 
 export async function fetchAdminCardsData() {
-  const cookiesStore = cookies();
+  const cookiesStore = await cookies();
   const options = setCookiesOnReq(cookiesStore);
 
   try {
@@ -36,7 +36,7 @@ export async function fetchAdminCardsData() {
 }
 
 export async function fetchUserCardsData() {
-  const cookiesStore = cookies();
+  const cookiesStore = await cookies();
   const options = setCookiesOnReq(cookiesStore);
 
   try {
