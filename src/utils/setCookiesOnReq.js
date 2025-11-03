@@ -3,7 +3,7 @@ export default function setCookiesOnReq(cookies) {
   const refreshToken = cookies.get("refreshToken");
 
   const options = {
-    credentials: "true",
+    credentials: "include",
     headers: {
       Cookie: `${accessToken?.name}=${accessToken?.value}; ${refreshToken?.name}=${refreshToken?.value}`,
     },
