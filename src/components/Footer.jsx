@@ -139,7 +139,7 @@ function Footer() {
           <ul className="mr-6 space-y-2 text-sm text-secondary-900">
             <li>
               <Link
-                href="https://www.linkedin.com/in/q-mahdi84"
+                href="https://www.linkedin.com/in/q84mahdi"
                 target="_blank"
                 className="transition-all duration-200 hover:text-primary-900"
               >
@@ -149,7 +149,7 @@ function Footer() {
 
             <li>
               <Link
-                href="https://github.com/mahdi-q"
+                href="https://github.com/q84mahdi"
                 target="_blank"
                 className="transition-all duration-200 hover:text-primary-900"
               >
@@ -159,7 +159,7 @@ function Footer() {
 
             <li>
               <Link
-                href="https://instagram.com/q.mahdi84"
+                href="https://instagram.com/q84mahdi"
                 target="_blank"
                 className="transition-all duration-200 hover:text-primary-900"
               >
